@@ -1,139 +1,287 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sawood Anwar</title>
-  <meta name="description" content="Sawood Anwar — computational social science, NLP, social media analysis, and digital methods." />
+  <meta name="description" content="Sawood Anwar — computational social scientist working on NLP, social media analysis, computational communication, and digital methods." />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f9fc;
-      color: #1f2937;
-      line-height: 1.7;
+    :root{
+      --bg:#0f172a;
+      --panel:#111827;
+      --panel-2:#1f2937;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --accent:#38bdf8;
+      --accent-2:#0ea5e9;
+      --card:#ffffff;
+      --card-text:#111827;
+      --border:#243041;
     }
-    .wrap {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 56px 20px;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:linear-gradient(180deg,#0f172a 0%,#111827 100%);
+      color:var(--text);
+      line-height:1.65;
     }
-    .card {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 40px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    a{
+      color:var(--accent);
+      text-decoration:none;
     }
-    h1 {
-      margin-top: 0;
-      color: #0b5cad;
-      font-size: 2.4rem;
+    a:hover{text-decoration:underline}
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:32px 20px 60px;
     }
-    h2 {
-      margin-top: 32px;
-      color: #0f172a;
-      font-size: 1.25rem;
+    .hero{
+      background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(14,165,233,.06));
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:48px 32px;
+      box-shadow:0 20px 50px rgba(0,0,0,.22);
     }
-    p {
-      margin: 0 0 14px 0;
+    .eyebrow{
+      display:inline-block;
+      font-size:.85rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin-bottom:14px;
     }
-    a {
-      color: #0b5cad;
-      text-decoration: none;
+    h1{
+      margin:0 0 12px;
+      font-size:2.7rem;
+      line-height:1.1;
     }
-    a:hover {
-      text-decoration: underline;
+    .lead{
+      max-width:760px;
+      font-size:1.08rem;
+      color:var(--text);
+      margin-bottom:22px;
     }
-    ul {
-      padding-left: 20px;
+    .hero-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:10px;
     }
-    .tag {
-      display: inline-block;
-      background: #e8f1fb;
-      color: #0b5cad;
-      border-radius: 999px;
-      padding: 6px 12px;
-      margin: 0 8px 8px 0;
-      font-size: .92rem;
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:600;
+      border:1px solid var(--border);
+      background:#0b1220;
+      color:var(--text);
     }
-    .note {
-      font-size: .95rem;
-      color: #6b7280;
+    .btn.primary{
+      background:var(--accent);
+      color:#082f49;
+      border-color:transparent;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:22px;
+      margin-top:22px;
+    }
+    .panel{
+      background:rgba(17,24,39,.92);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:26px;
+    }
+    h2{
+      margin:0 0 14px;
+      font-size:1.15rem;
+      color:#f8fafc;
+    }
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .tag{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#172554;
+      color:#bfdbfe;
+      font-size:.92rem;
+      border:1px solid rgba(191,219,254,.12);
+    }
+    .meta-list, .pub-list{
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .meta-list li, .pub-list li{
+      padding:10px 0;
+      border-bottom:1px solid rgba(148,163,184,.12);
+    }
+    .meta-list li:last-child, .pub-list li:last-child{
+      border-bottom:none;
+    }
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:18px;
+      margin-top:22px;
+    }
+    .card{
+      background:#ffffff;
+      color:var(--card-text);
+      border-radius:20px;
+      padding:22px;
+      box-shadow:0 14px 30px rgba(0,0,0,.18);
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.05rem;
+    }
+    .card p{
+      margin:0 0 12px;
+      color:#374151;
+      font-size:.97rem;
+    }
+    .mini{
+      display:inline-block;
+      font-size:.8rem;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#e0f2fe;
+      color:#075985;
+      margin-bottom:10px;
+    }
+    .footer-note{
+      margin-top:24px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr}
+      h1{font-size:2.2rem}
+      .hero{padding:36px 24px}
     }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <section class="card">
+    <section class="hero">
+      <span class="eyebrow">Academic Portfolio</span>
       <h1>Sawood Anwar</h1>
-      <p>
+      <p class="lead">
         Computational social scientist and researcher focused on NLP, social media analysis,
         computational communication, and digital methods.
       </p>
+      <div class="hero-links">
+        <a class="btn primary" href="https://github.com/sawoodanwar">GitHub</a>
+        <a class="btn" href="https://scholar.google.com/citations?user=GgsMu3sAAAAJ&hl=en">Google Scholar</a>
+        <a class="btn" href="https://orcid.org/0009-0000-2819-9179">ORCID</a>
+        <a class="btn" href="https://www.linkedin.com/in/sawood-anwar/">LinkedIn</a>
+      </div>
+    </section>
 
-      <h2>Research Interests</h2>
-      <div>
-        <span class="tag">Computational communication</span>
-        <span class="tag">Social media analysis</span>
-        <span class="tag">NLP</span>
-        <span class="tag">Topic modeling</span>
-        <span class="tag">Sentiment analysis</span>
-        <span class="tag">Time-series analysis</span>
-        <span class="tag">Health communication</span>
-        <span class="tag">Political communication</span>
-        <span class="tag">Misinformation research</span>
-        <span class="tag">Survey methods</span>
+    <section class="grid">
+      <div class="panel">
+        <h2>Research Interests</h2>
+        <div class="tags">
+          <span class="tag">Computational communication</span>
+          <span class="tag">Social media analysis</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Topic modeling</span>
+          <span class="tag">Sentiment analysis</span>
+          <span class="tag">Time-series analysis</span>
+          <span class="tag">Health communication</span>
+          <span class="tag">Political communication</span>
+          <span class="tag">Misinformation research</span>
+          <span class="tag">Survey methods</span>
+        </div>
       </div>
 
-      <h2>Methods and Tools</h2>
-      <ul>
-        <li><strong>R:</strong> tidyverse, quanteda, stm, tidytext, psych, lavaan, ggplot2.</li>
-        <li><strong>Python:</strong> scikit-learn, text processing, machine learning workflows.</li>
-        <li><strong>Methods:</strong> topic modeling, sentiment analysis, time-series analysis, content coding, survey analysis.</li>
-        <li><strong>Data sources:</strong> Meta platforms, Reddit, CrowdTangle exports, Meta Content Library API.</li>
-      </ul>
-
-      <h2>Selected Projects</h2>
-      <ul>
-        <li><a href="https://github.com/sawoodanwar/facebook-reactions-covid19-india">facebook-reactions-covid19-india</a> — social media engagement and reaction analysis.</li>
-        <li><a href="https://github.com/sawoodanwar/timeseries-facebook-engagement-r">timeseries-facebook-engagement-r</a> — time-series workflows for digital engagement data.</li>
-        <li><a href="https://github.com/sawoodanwar/stm-social-media-r">stm-social-media-r</a> — STM topic modeling workflow in R.</li>
-        <li><a href="https://github.com/sawoodanwar/bertopic-media-topics">bertopic-media-topics</a> — BERTopic workflow for media and text analysis.</li>
-        <li><a href="https://github.com/sawoodanwar/meta-content-analysis">meta-content-analysis</a> — platform content analysis workflows.</li>
-        <li><a href="https://github.com/sawoodanwar/reddit-political-misinfo-coding">reddit-political-misinfo-coding</a> — manual coding framework for political communication and misinformation.</li>
-      </ul>
-
-      <h2>Publications</h2>
-      <ul>
-        <li>
-          Anwar, S. (2024).
-          <a href="https://doi.org/10.3389/fsoc.2024.1379265" target="_blank" rel="noopener noreferrer">
-            Article in Frontiers in Sociology
-          </a>.
-          <em>Frontiers in Sociology</em>, 9.
-        </li>
-        <li>
-          Giglietto, F., Ghasiya, P., Sasahara, K., Anwar, S., &amp; Mincigrucci, R. (2022).
-          <a href="https://doi.org/10.2139/ssrn.4164140" target="_blank" rel="noopener noreferrer">
-            Between Localism and Politics: Mapping Coordinated Networks that Circulate Problematic Health Content in India
-          </a>.
-          <em>SSRN Scholarly Paper</em>.
-        </li>
-      </ul>
-
-      <h2>Profiles</h2>
-      <ul>
-        <li><a href="https://github.com/sawoodanwar">GitHub</a></li>
-        <li><a href="https://scholar.google.com/citations?user=GgsMu3sAAAAJ&hl=en">Google Scholar</a></li>
-        <li><a href="https://orcid.org/0009-0000-2819-9179">ORCID</a></li>
-        <li><a href="https://www.linkedin.com/in/sawood-anwar/">LinkedIn</a></li>
-      </ul>
-
-      <p class="note">
-        This homepage shares public projects, publications, and profile links only.
-      </p>
+      <div class="panel">
+        <h2>Methods and Tools</h2>
+        <ul class="meta-list">
+          <li><strong>R:</strong> tidyverse, quanteda, stm, tidytext, psych, lavaan, ggplot2</li>
+          <li><strong>Python:</strong> scikit-learn, text processing, machine learning workflows</li>
+          <li><strong>Methods:</strong> topic modeling, sentiment analysis, time-series analysis, content coding, survey analysis</li>
+          <li><strong>Data:</strong> Meta platforms, Reddit, CrowdTangle exports, Meta Content Library API</li>
+        </ul>
+      </div>
     </section>
+
+    <section class="cards">
+      <article class="card">
+        <span class="mini">Featured Project</span>
+        <h3><a href="https://github.com/sawoodanwar/facebook-reactions-covid19-india">facebook-reactions-covid19-india</a></h3>
+        <p>Social media engagement and reaction analysis focused on COVID-19 news and public response.</p>
+      </article>
+
+      <article class="card">
+        <span class="mini">Time Series</span>
+        <h3><a href="https://github.com/sawoodanwar/timeseries-facebook-engagement-r">timeseries-facebook-engagement-r</a></h3>
+        <p>Reusable time-series workflows for digital engagement data, anomaly detection, and spike analysis.</p>
+      </article>
+
+      <article class="card">
+        <span class="mini">Topic Modeling</span>
+        <h3><a href="https://github.com/sawoodanwar/stm-social-media-r">stm-social-media-r</a></h3>
+        <p>STM workflow in R for preprocessing, model fitting, covariates, and interpretation.</p>
+      </article>
+
+      <article class="card">
+        <span class="mini">BERTopic</span>
+        <h3><a href="https://github.com/sawoodanwar/bertopic-media-topics">bertopic-media-topics</a></h3>
+        <p>BERTopic-based media and text analysis workflow for clustering and thematic exploration.</p>
+      </article>
+
+      <article class="card">
+        <span class="mini">Platform Analysis</span>
+        <h3><a href="https://github.com/sawoodanwar/meta-content-analysis">meta-content-analysis</a></h3>
+        <p>Platform content analysis workflows for studying communication and misinformation.</p>
+      </article>
+
+      <article class="card">
+        <span class="mini">Coding Framework</span>
+        <h3><a href="https://github.com/sawoodanwar/reddit-political-misinfo-coding">reddit-political-misinfo-coding</a></h3>
+        <p>Manual coding framework for political communication and misinformation research on Reddit.</p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Selected Publications</h2>
+        <ul class="pub-list">
+          <li>
+            Anwar, S. (2024).
+            <a href="https://doi.org/10.3389/fsoc.2024.1379265">Article in Frontiers in Sociology</a>.
+            <em>Frontiers in Sociology</em>, 9.
+          </li>
+          <li>
+            Giglietto, F., Ghasiya, P., Sasahara, K., Anwar, S., &amp; Mincigrucci, R. (2022).
+            <a href="https://doi.org/10.2139/ssrn.4164140">Between Localism and Politics: Mapping Coordinated Networks that Circulate Problematic Health Content in India</a>.
+            <em>SSRN Scholarly Paper</em>.
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>Profiles</h2>
+        <ul class="meta-list">
+          <li><a href="https://github.com/sawoodanwar">GitHub</a></li>
+          <li><a href="https://scholar.google.com/citations?user=GgsMu3sAAAAJ&hl=en">Google Scholar</a></li>
+          <li><a href="https://orcid.org/0009-0000-2819-9179">ORCID</a></li>
+          <li><a href="https://www.linkedin.com/in/sawood-anwar/">LinkedIn</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="footer-note">
+      This homepage shares public projects, publications, and profile links only.
+    </p>
   </main>
 </body>
 </html>
