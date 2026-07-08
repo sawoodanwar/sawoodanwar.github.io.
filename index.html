@@ -1,244 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sawood Anwar</title>
-  <meta name="description" content="Sawood Anwar — computational social scientist working on NLP, social media analysis, computational communication, and digital methods." />
+  <meta name="description" content="Sawood Anwar — computational social scientist working on NLP, social media analysis, computational communication, and digital methods.">
   <style>
-    * {
-      box-sizing: border-box;
+    :root{
+      --bg1:#0b1120;
+      --bg2:#111827;
+      --panel:#0f172a;
+      --panel2:#111827;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --accent:#38bdf8;
+      --accentDark:#075985;
+      --border:#243041;
+      --white:#ffffff;
+      --dark:#111827;
+      --chip:#172554;
+      --chipText:#bfdbfe;
     }
-
-    html {
-      scroll-behavior: smooth;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      line-height:1.6;
+      color:var(--text);
+      background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);
     }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background: linear-gradient(180deg, #0b1120 0%, #111827 100%);
-      color: #e5e7eb;
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px 20px 56px;
     }
-
-    a {
-      color: #38bdf8;
-      text-decoration: none;
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+      padding:14px 18px;
+      margin-bottom:20px;
+      background:rgba(15,23,42,.92);
+      border:1px solid var(--border);
+      border-radius:16px;
     }
-
-    a:hover {
-      text-decoration: underline;
+    .brand{
+      font-weight:700;
+      color:#f8fafc;
     }
-
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px 20px 60px;
+    .nav-links{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
     }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid #243041;
-      border-radius: 16px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
+    .nav-links a{
+      color:#cbd5e1;
+      font-size:.95rem;
     }
-
-    .nav-title {
-      font-weight: 700;
-      color: #f8fafc;
+    .hero{
+      padding:46px 28px;
+      border-radius:24px;
+      border:1px solid var(--border);
+      background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(14,165,233,.05));
+      box-shadow:0 18px 45px rgba(0,0,0,.22);
+      margin-bottom:22px;
     }
-
-    .nav-links {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:12px;
+      color:var(--accent);
+      font-size:.85rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
     }
-
-    .nav-links a {
-      color: #cbd5e1;
-      font-size: 0.95rem;
+    h1{
+      margin:0 0 12px;
+      color:#f8fafc;
+      font-size:2.6rem;
+      line-height:1.1;
     }
-
-    .hero {
-      background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(14,165,233,0.05));
-      border: 1px solid #243041;
-      border-radius: 24px;
-      padding: 48px 28px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.22);
-      margin-bottom: 22px;
+    .lead{
+      max-width:760px;
+      margin:0 0 20px;
+      color:#dbeafe;
+      font-size:1.06rem;
     }
-
-    .eyebrow {
-      display: inline-block;
-      color: #38bdf8;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 14px;
+    .buttons{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
     }
-
-    h1 {
-      margin: 0 0 12px;
-      font-size: 2.7rem;
-      line-height: 1.1;
-      color: #f8fafc;
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:999px;
+      background:#0f172a;
+      border:1px solid var(--border);
+      color:var(--text);
+      font-weight:600;
     }
-
-    .lead {
-      max-width: 760px;
-      margin: 0 0 22px;
-      color: #dbeafe;
-      font-size: 1.08rem;
+    .btn.primary{
+      background:var(--accent);
+      border-color:transparent;
+      color:#082f49;
     }
-
-    .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:22px;
+      margin-bottom:22px;
     }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 18px;
-      border-radius: 999px;
-      border: 1px solid #243041;
-      background: #0f172a;
-      color: #e5e7eb;
-      font-weight: 600;
+    .panel{
+      background:rgba(15,23,42,.94);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:24px;
     }
-
-    .btn.primary {
-      background: #38bdf8;
-      color: #082f49;
-      border-color: transparent;
+    h2{
+      margin:0 0 14px;
+      color:#f8fafc;
+      font-size:1.18rem;
     }
-
-    .grid-two {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 22px;
-      margin-bottom: 22px;
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
     }
-
-    .panel {
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid #243041;
-      border-radius: 22px;
-      padding: 24px;
+    .tag{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--chip);
+      color:var(--chipText);
+      font-size:.92rem;
+      border:1px solid rgba(191,219,254,.12);
     }
-
-    h2 {
-      margin-top: 0;
-      margin-bottom: 14px;
-      color: #f8fafc;
-      font-size: 1.2rem;
+    .list{
+      list-style:none;
+      margin:0;
+      padding:0;
     }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .list li{
+      padding:10px 0;
+      border-bottom:1px solid rgba(148,163,184,.12);
     }
-
-    .tag {
-      display: inline-block;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: #172554;
-      color: #bfdbfe;
-      font-size: 0.92rem;
-      border: 1px solid rgba(191,219,254,0.12);
+    .list li:last-child{
+      border-bottom:none;
     }
-
-    .meta-list,
-    .pub-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .projects{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:18px;
+      margin-bottom:22px;
     }
-
-    .meta-list li,
-    .pub-list li {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(148,163,184,0.12);
+    .card{
+      background:var(--white);
+      color:var(--dark);
+      border-radius:18px;
+      padding:22px;
+      box-shadow:0 14px 30px rgba(0,0,0,.18);
     }
-
-    .meta-list li:last-child,
-    .pub-list li:last-child {
-      border-bottom: none;
+    .label{
+      display:inline-block;
+      margin-bottom:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#e0f2fe;
+      color:var(--accentDark);
+      font-size:.8rem;
+      font-weight:600;
     }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 18px;
-      margin-bottom: 22px;
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.04rem;
+      line-height:1.3;
     }
-
-    .project-card {
-      background: #ffffff;
-      color: #111827;
-      border-radius: 20px;
-      padding: 22px;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+    .card p{
+      margin:0;
+      color:#374151;
+      font-size:.96rem;
     }
-
-    .project-label {
-      display: inline-block;
-      margin-bottom: 10px;
-      font-size: 0.8rem;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #e0f2fe;
-      color: #075985;
-      font-weight: 600;
+    .note{
+      margin-top:22px;
+      color:var(--muted);
+      font-size:.94rem;
     }
-
-    .project-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.05rem;
-      line-height: 1.3;
-    }
-
-    .project-card p {
-      margin: 0;
-      color: #374151;
-      font-size: 0.96rem;
-    }
-
-    .footer-note {
-      margin-top: 24px;
-      color: #94a3b8;
-      font-size: 0.94rem;
-    }
-
-    @media (max-width: 900px) {
-      .grid-two {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 2.2rem;
-      }
-
-      .hero {
-        padding: 36px 22px;
-      }
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+      h1{font-size:2.15rem}
+      .hero{padding:36px 22px}
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrap">
     <nav class="nav">
-      <div class="nav-title">Sawood Anwar</div>
+      <div class="brand">Sawood Anwar</div>
       <div class="nav-links">
         <a href="#interests">Interests</a>
         <a href="#projects">Projects</a>
@@ -248,13 +210,13 @@
     </nav>
 
     <section class="hero">
-      <span class="eyebrow">Academic Portfolio</span>
+      <div class="eyebrow">Academic Portfolio</div>
       <h1>Sawood Anwar</h1>
       <p class="lead">
         Computational social scientist and researcher focused on NLP, social media analysis,
         computational communication, and digital methods.
       </p>
-      <div class="button-group">
+      <div class="buttons">
         <a class="btn primary" href="https://github.com/sawoodanwar" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a class="btn" href="https://scholar.google.com/citations?user=GgsMu3sAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
         <a class="btn" href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer">ORCID</a>
@@ -262,7 +224,7 @@
       </div>
     </section>
 
-    <section class="grid-two" id="interests">
+    <section class="grid" id="interests">
       <div class="panel">
         <h2>Research Interests</h2>
         <div class="tags">
@@ -281,7 +243,7 @@
 
       <div class="panel">
         <h2>Methods and Tools</h2>
-        <ul class="meta-list">
+        <ul class="list">
           <li><strong>R:</strong> tidyverse, quanteda, stm, tidytext, psych, lavaan, ggplot2</li>
           <li><strong>Python:</strong> scikit-learn, text processing, machine learning workflows</li>
           <li><strong>Methods:</strong> topic modeling, sentiment analysis, time-series analysis, content coding, survey analysis</li>
@@ -291,67 +253,61 @@
     </section>
 
     <section class="projects" id="projects">
-      <article class="project-card">
-        <span class="project-label">Featured Project</span>
+      <article class="card">
+        <div class="label">Featured Project</div>
         <h3><a href="https://github.com/sawoodanwar/facebook-reactions-covid19-india" target="_blank" rel="noopener noreferrer">facebook-reactions-covid19-india</a></h3>
         <p>Social media engagement and reaction analysis focused on COVID-19 news and public response.</p>
       </article>
 
-      <article class="project-card">
-        <span class="project-label">Time Series</span>
+      <article class="card">
+        <div class="label">Time Series</div>
         <h3><a href="https://github.com/sawoodanwar/timeseries-facebook-engagement-r" target="_blank" rel="noopener noreferrer">timeseries-facebook-engagement-r</a></h3>
         <p>Reusable time-series workflows for digital engagement data, anomaly detection, and spike analysis.</p>
       </article>
 
-      <article class="project-card">
-        <span class="project-label">Topic Modeling</span>
+      <article class="card">
+        <div class="label">Topic Modeling</div>
         <h3><a href="https://github.com/sawoodanwar/stm-social-media-r" target="_blank" rel="noopener noreferrer">stm-social-media-r</a></h3>
         <p>STM workflow in R for preprocessing, model fitting, covariates, and interpretation.</p>
       </article>
 
-      <article class="project-card">
-        <span class="project-label">BERTopic</span>
+      <article class="card">
+        <div class="label">BERTopic</div>
         <h3><a href="https://github.com/sawoodanwar/bertopic-media-topics" target="_blank" rel="noopener noreferrer">bertopic-media-topics</a></h3>
         <p>BERTopic-based media and text analysis workflow for clustering and thematic exploration.</p>
       </article>
 
-      <article class="project-card">
-        <span class="project-label">Platform Analysis</span>
+      <article class="card">
+        <div class="label">Platform Analysis</div>
         <h3><a href="https://github.com/sawoodanwar/meta-content-analysis" target="_blank" rel="noopener noreferrer">meta-content-analysis</a></h3>
         <p>Platform content analysis workflows for studying communication and misinformation.</p>
       </article>
 
-      <article class="project-card">
-        <span class="project-label">Coding Framework</span>
+      <article class="card">
+        <div class="label">Coding Framework</div>
         <h3><a href="https://github.com/sawoodanwar/reddit-political-misinfo-coding" target="_blank" rel="noopener noreferrer">reddit-political-misinfo-coding</a></h3>
         <p>Manual coding framework for political communication and misinformation research on Reddit.</p>
       </article>
     </section>
 
-    <section class="grid-two" id="publications">
+    <section class="grid" id="publications">
       <div class="panel">
         <h2>Selected Publications</h2>
-        <ul class="pub-list">
+        <ul class="list">
           <li>
             Anwar, S. (2024).
-            <a href="https://doi.org/10.3389/fsoc.2024.1379265" target="_blank" rel="noopener noreferrer">
-              Article in Frontiers in Sociology
-            </a>.
+            <a href="https://doi.org/10.3389/fsoc.2024.1379265" target="_blank" rel="noopener noreferrer">Article in Frontiers in Sociology</a>.
             <em>Frontiers in Sociology</em>, 9.
           </li>
           <li>
             Anwar, S. (2025).
-            <a href="https://ora.uniurb.it/handle/11576/2761691" target="_blank" rel="noopener noreferrer">
-              “Facebook reactions” as emotional indicators: A multi-method approach to analyzing user engagement with COVID-19 news on Indian media platforms
-            </a>.
+            <a href="https://ora.uniurb.it/handle/11576/2761691" target="_blank" rel="noopener noreferrer">“Facebook reactions” as emotional indicators: A multi-method approach to analyzing user engagement with COVID-19 news on Indian media platforms</a>.
             <em>[Doctoral dissertation, University of Urbino Carlo Bo]</em>.
             University of Urbino IRIS Publication Repository.
           </li>
           <li>
             Giglietto, F., Ghasiya, P., Sasahara, K., Anwar, S., &amp; Mincigrucci, R. (2022).
-            <a href="https://doi.org/10.2139/ssrn.4164140" target="_blank" rel="noopener noreferrer">
-              Between Localism and Politics: Mapping Coordinated Networks that Circulate Problematic Health Content in India
-            </a>.
+            <a href="https://doi.org/10.2139/ssrn.4164140" target="_blank" rel="noopener noreferrer">Between Localism and Politics: Mapping Coordinated Networks that Circulate Problematic Health Content in India</a>.
             <em>SSRN Scholarly Paper</em>.
           </li>
         </ul>
@@ -359,7 +315,7 @@
 
       <div class="panel" id="profiles">
         <h2>Profiles</h2>
-        <ul class="meta-list">
+        <ul class="list">
           <li><a href="https://github.com/sawoodanwar" target="_blank" rel="noopener noreferrer">GitHub</a></li>
           <li><a href="https://scholar.google.com/citations?user=GgsMu3sAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a></li>
           <li><a href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer">ORCID</a></li>
@@ -368,7 +324,7 @@
       </div>
     </section>
 
-    <p class="footer-note">
+    <p class="note">
       This homepage shares public projects, publications, and profile links only.
     </p>
   </div>
