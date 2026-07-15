@@ -344,8 +344,9 @@
     }
     .profile-btn {
       display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
       padding: 10px 20px;
       border-radius: 4px;
       border: 1px solid var(--border);
@@ -360,6 +361,12 @@
       color: var(--accent);
       background: rgba(201,169,110,.05);
       text-decoration: none;
+    }
+    .profile-btn .orcid-id {
+      font-size: .75rem;
+      font-weight: 400;
+      opacity: .7;
+      letter-spacing: .02em;
     }
 
     footer {
@@ -538,7 +545,10 @@
       <div class="section-label"><span></span>Academic Profiles</div>
       <div class="profiles-grid">
         <a class="profile-btn" href="https://scholar.google.com/citations?user=Z2kACpkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-        <a class="profile-btn" href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer">ORCID&nbsp;0009-0000-2819-9179</a>
+        <a class="profile-btn" href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer">
+          <span>ORCID</span>
+          <span class="orcid-id">0009-0000-2819-9179</span>
+        </a>
         <a class="profile-btn" href="https://github.com/sawoodanwar" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a class="profile-btn" href="https://www.linkedin.com/in/sawood-anwar/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
