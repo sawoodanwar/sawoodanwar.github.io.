@@ -1,0 +1,31 @@
+/* TEAM */
+Researcher & Developer: Sawood Anwar
+Title: PhD — Computational Social Scientist
+Affiliation: University of Urbino Carlo Bo, DISCUI, Italy
+ORCID: https://orcid.org/0009-0000-2819-9179
+Google Scholar: https://scholar.google.com/citations?user=Z2kACpkAAAAJ&hl=en
+GitHub: https://github.com/sawoodanwar
+LinkedIn: https://www.linkedin.com/in/sawood-anwar/
+Email: anwar1524@gmail.com
+Location: Urbino, Italy
+
+/* THANKS */
+Supervisor: Prof. Fabio Giglietto — University of Urbino Carlo Bo
+Co-Supervisor: Prof. Giovanni Boccia Artieri — University of Urbino Carlo Bo
+Coordinator: Prof. Liana Lomiento — University of Urbino Carlo Bo
+
+/* SITE */
+Last update: 2026-07-17
+Language: English
+Doctype: HTML5
+Hosting: GitHub Pages (github.io)
+Software: Hand-coded HTML/CSS
+
+/* RESEARCH */
+PhD Title: "Facebook Reactions" as Emotional Indicators: A Multi-Method Approach
+          to Analyzing User Engagement with COVID-19 News on Indian Media Platforms
+Institution: University of Urbino Carlo Bo
+Department: Department of Communication Sciences, Humanities and International Studies (DISCUI)
+Defended: September 22, 2025
+Repository: https://ora.uniurb.it/handle/11576/2761691
+Journal Article: https://doi.org/10.3389/fsoc.2024.1379265

@@ -1,4 +1,29 @@
+# robots.txt — sawoodanwar.github.io
+# Standard crawlers
 User-agent: *
 Allow: /
 
+# AI training crawlers — allow indexing, disallow bulk training scraping
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: FacebookExternalHit
+Allow: /
+
+# Sitemap
 Sitemap: https://sawoodanwar.github.io/sitemap.xml

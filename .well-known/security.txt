@@ -1,0 +1,6 @@
+# Security contact for sawoodanwar.github.io
+# RFC 9116 compliant
+Contact: mailto:anwar1524@gmail.com
+Expires: 2027-07-17T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://sawoodanwar.github.io/.well-known/security.txt
