@@ -42,17 +42,6 @@
       --border:#263450; --text:#dde3ee; --muted:#8c9ab5; --heading:#f0f4ff;
       --accent:#c9a96e; --accent2:#7eafd4; --tag-bg:#1a2a45; --tag-text:#a8c4e0;
       --green:#5db88a; --purple:#9d85d4;
-      /* Contact section light theme */
-      --contact-bg:#f5f7fa;
-      --contact-bg2:#ffffff;
-      --contact-border:#dde3ee;
-      --contact-text:#1e2a3a;
-      --contact-muted:#4a5a6e;
-      --contact-label:#2c3e55;
-      --contact-input-bg:#ffffff;
-      --contact-input-border:#c8d0dc;
-      --contact-input-focus:#3a7abf;
-      --contact-section-line:#3a7abf;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
@@ -133,99 +122,72 @@
     .profiles-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;}
     .profile-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:4px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:.88rem;font-weight:500;transition:all .2s;}
     .profile-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.05);text-decoration:none;}
-
-    /* ═══ CONTACT SECTION — LIGHT THEME ══════════════════════════════ */
+    /* ═══ CONTACT SECTION ═══════════════════════════════════════ */
     .contact-section{margin-bottom:30px;margin-top:10px;}
-    .contact-section .section-label{
-      color:#1e2a3a;
-      border-bottom-color:#c8d0dc;
-    }
-    .contact-section .section-label span{
-      background:var(--contact-section-line);
-    }
     .contact-form{
-      background:var(--contact-bg);
-      border:1px solid var(--contact-border);
-      border-radius:10px;
-      border-top:4px solid var(--contact-section-line);
+      background:var(--surface2);
+      border:1px solid rgba(201,169,110,.35);
+      border-top:3px solid var(--accent);
+      border-radius:8px;
       padding:36px 40px;
-      box-shadow:0 6px 32px rgba(30,60,120,.10), 0 1px 4px rgba(0,0,0,.06);
+      box-shadow:0 0 40px rgba(201,169,110,.07), 0 8px 32px rgba(0,0,0,.25);
     }
-    .contact-form>p{
-      color:var(--contact-muted);
-      font-size:.95rem;
-      margin:14px 0 0;
-      line-height:1.75;
-    }
-    .contact-form>p strong{
-      color:var(--contact-text);
-      font-weight:600;
-    }
+    .contact-form>p{color:#b4c2d8;font-size:.95rem;margin:14px 0 0;line-height:1.75;}
+    .contact-form>p strong{color:var(--heading);font-weight:600;}
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;}
     .form-group{display:flex;flex-direction:column;gap:6px;}
     .form-group.full{grid-column:1/-1;}
     .form-group label{
       font-size:.80rem;
-      font-weight:700;
-      color:var(--contact-label);
+      font-weight:600;
+      color:var(--accent);
       text-transform:uppercase;
-      letter-spacing:.07em;
+      letter-spacing:.08em;
     }
     .form-group input,
     .form-group textarea,
     .form-group select{
-      background:var(--contact-input-bg);
-      border:1.5px solid var(--contact-input-border);
+      background:#0f1a2e;
+      border:1px solid var(--border);
       border-radius:5px;
       padding:10px 14px;
-      color:var(--contact-text);
+      color:var(--text);
       font-family:'Inter',sans-serif;
       font-size:.9rem;
       transition:border-color .2s, box-shadow .2s;
       outline:none;
-      box-shadow:0 1px 3px rgba(0,0,0,.06);
     }
     .form-group input::placeholder,
-    .form-group textarea::placeholder{
-      color:#9aaabb;
-    }
+    .form-group textarea::placeholder{color:#4a5e7a;}
     .form-group input:focus,
     .form-group textarea:focus,
     .form-group select:focus{
-      border-color:var(--contact-input-focus);
-      box-shadow:0 0 0 3px rgba(58,122,191,.15);
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(201,169,110,.15);
     }
     .form-group textarea{resize:vertical;min-height:130px;}
-    .form-group select{
-      color:var(--contact-text);
-      cursor:pointer;
-    }
-    .form-group select option{background:#fff;color:#1e2a3a;}
+    .form-group select option{background:#0f1a2e;color:var(--text);}
     .form-submit-row{margin-top:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;grid-column:1/-1;}
     .btn-submit{
       display:inline-flex;align-items:center;gap:8px;
-      padding:12px 30px;
-      border-radius:5px;
-      background:var(--contact-section-line);
+      padding:11px 28px;
+      border-radius:4px;
+      background:var(--accent);
       border:none;
-      color:#ffffff;
+      color:#1a1000;
       font-size:.92rem;
       font-weight:700;
       cursor:pointer;
-      transition:background .2s, transform .15s, box-shadow .2s;
-      box-shadow:0 3px 12px rgba(58,122,191,.30);
+      transition:background .2s,transform .15s,box-shadow .2s;
+      box-shadow:0 3px 14px rgba(201,169,110,.30);
     }
     .btn-submit:hover{
-      background:#2a6aad;
+      background:#e0bc84;
       transform:translateY(-1px);
-      box-shadow:0 5px 18px rgba(58,122,191,.40);
+      box-shadow:0 5px 20px rgba(201,169,110,.45);
     }
-    .form-note{font-size:.80rem;color:var(--contact-muted);}
-    @media(max-width:600px){
-      .form-grid{grid-template-columns:1fr;}
-      .contact-form{padding:26px 20px;}
-    }
-
+    .form-note{font-size:.80rem;color:var(--muted);}
+    @media(max-width:600px){.form-grid{grid-template-columns:1fr;}.contact-form{padding:26px 20px;}}
     footer{margin-top:60px;padding:24px 0 10px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:.82rem;}
     footer a{color:var(--muted);}
     footer a:hover{color:var(--accent);}
@@ -384,7 +346,6 @@
       </div>
     </section>
 
-    <!-- CONTACT — LIGHT THEME -->
     <section class="contact-section" id="contact">
       <div class="section-label"><span></span>Contact Me</div>
       <div class="contact-form">
@@ -403,8 +364,8 @@
             <input type="email" id="cf-email" name="email" placeholder="jane@university.edu" required />
           </div>
           <div class="form-group">
-            <label for="cf-affil">Affiliation</label>
-            <input type="text" id="cf-affil" name="affiliation" placeholder="University / Institution" />
+            <label for="cf-affil">Organization</label>
+            <input type="text" id="cf-affil" name="organization" placeholder="University / Institution / Company" />
           </div>
           <div class="form-group">
             <label for="cf-topic">Topic</label>
