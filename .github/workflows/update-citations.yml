@@ -1,0 +1,65 @@
+name: Update Citation Count
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # Every Monday at 06:00 UTC
+  workflow_dispatch:       # Allow manual trigger from Actions tab
+
+jobs:
+  fetch-citations:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch citation count from Semantic Scholar
+        id: fetch
+        run: |
+          # DOI for the Frontiers in Sociology paper
+          DOI="10.3389/fsoc.2024.1379265"
+
+          RESPONSE=$(curl -s --max-time 20 \
+            "https://api.semanticscholar.org/graph/v1/paper/DOI:${DOI}?fields=citationCount,title,year")
+
+          echo "API response: $RESPONSE"
+
+          COUNT=$(echo "$RESPONSE" | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+print(data.get('citationCount', 0))
+")
+
+          echo "citation_count=$COUNT" >> $GITHUB_OUTPUT
+          echo "Fetched citation count: $COUNT"
+
+      - name: Write citations.json
+        run: |
+          COUNT="${{ steps.fetch.outputs.citation_count }}"
+          DATE=$(date -u +"%Y-%m-%d")
+          cat > citations.json << EOF
+          {
+            "frontiers2024": {
+              "doi": "10.3389/fsoc.2024.1379265",
+              "title": "Facebook Reactions as Emotional Indicators",
+              "citationCount": ${COUNT},
+              "lastUpdated": "${DATE}"
+            }
+          }
+          EOF
+          cat citations.json
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add citations.json
+          # Only commit if there is actually a change
+          if git diff --cached --quiet; then
+            echo "No change in citation count — skipping commit."
+          else
+            git commit -m "chore: update citation count [skip ci]"
+            git push
+          fi
