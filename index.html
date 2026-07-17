@@ -16,7 +16,7 @@
   <link rel="me" href="https://github.com/sawoodanwar">
   <meta property="og:type"        content="profile">
   <meta property="og:title"       content="Sawood Anwar, PhD — Computational Social Scientist">
-  <meta property="og:description" content="PhD researcher at University of Urbino Carlo Bo specialising in NLP, social media analysis, topic modelling, and computational communication. Author of Facebook Reactions study on COVID-19 Indian media data.">
+  <meta property="og:description" content="PhD researcher at University of Urbino Carlo Bo specialising in NLP, social media analysis, topic modelling, and computational communication.">
   <meta property="og:url"         content="https://sawoodanwar.github.io/">
   <meta property="og:image"       content="https://github.com/sawoodanwar.png">
   <meta property="og:locale"      content="en_US">
@@ -29,11 +29,10 @@
   <meta name="google-site-verification" content="QIeNT3Fm6p4qbvWpt9pzIEDvzBUYy9RsJBzvwJYW1xM">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <link rel="dns-prefetch" href="https://github.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="https://github.com/sawoodanwar.png">
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   [
     {"@context":"https://schema.org","@type":"Person","@id":"https://sawoodanwar.github.io/#person","name":"Sawood Anwar","honorificSuffix":"PhD","givenName":"Sawood","familyName":"Anwar","jobTitle":"Early Career Researcher","description":"Computational social scientist specialising in NLP, social media analysis, topic modelling, sentiment analysis, and computational communication research.","url":"https://sawoodanwar.github.io","image":{"@type":"ImageObject","url":"https://github.com/sawoodanwar.png","width":460,"height":460},"email":"anwar1524@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Urbino","addressRegion":"Marche","addressCountry":"IT"},"alumniOf":{"@type":"CollegeOrUniversity","name":"University of Urbino Carlo Bo","url":"https://www.uniurb.it","department":"Department of Communication Sciences, Humanities and International Studies (DISCUI)"},"hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"Doctorate","name":"PhD in Humanities — Text and Communication Sciences","dateCreated":"2025-09-22","recognizedBy":{"@type":"CollegeOrUniversity","name":"University of Urbino Carlo Bo"}},"knowsAbout":["Computational Communication","Natural Language Processing","Topic Modeling","Sentiment Analysis","Social Media Analysis","Time-Series Analysis","Health Communication","Misinformation Research","BERTopic","Facebook Reactions","COVID-19 News Analysis"],"sameAs":["https://github.com/sawoodanwar","https://scholar.google.com/citations?user=Z2kACpkAAAAJ&hl=en","https://orcid.org/0009-0000-2819-9179","https://www.linkedin.com/in/sawood-anwar/"],"worksFor":{"@type":"Organization","name":"Independent Researcher"},"author":[{"@id":"https://sawoodanwar.github.io/#pub-frontiers2024"},{"@id":"https://sawoodanwar.github.io/#pub-thesis2025"}]},
@@ -43,140 +42,433 @@
   ]
   </script>
   <style>
+    /* ── Design tokens ── */
     :root {
-      --bg:#0e1525; --bg2:#131d30; --surface:#172035; --surface2:#1c2840;
-      --border:#263450; --text:#dde3ee; --muted:#8c9ab5; --heading:#f0f4ff;
-      --accent:#c9a96e; --accent2:#7eafd4; --tag-bg:#1a2a45; --tag-text:#a8c4e0;
+      --bg:#0d1422; --bg2:#111926; --surface:#15202f; --surface2:#192538;
+      --border:#243148; --text:#d8e0f0; --muted:#8796b4; --heading:#eef2ff;
+      --accent:#c9a96e; --accent-light:#e8d4a8; --accent2:#7eafd4;
+      --tag-bg:#182236; --tag-text:#a4c0dc;
       --green:#5db88a; --purple:#9d85d4;
+      --radius:7px;
     }
+
+    /* ── Scroll progress bar ── */
+    #scroll-bar {
+      position:fixed;top:0;left:0;z-index:9999;
+      height:3px;width:0%;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      transition:width .1s linear;
+      pointer-events:none;
+    }
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
-    body{font-family:'Inter',sans-serif;font-size:15.5px;line-height:1.7;color:var(--text);background:var(--bg);background-image:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(100,130,200,.10) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(80,110,180,.08) 0%,transparent 55%);min-height:100vh;}
+    body{
+      font-family:'Inter',sans-serif;font-size:15.5px;line-height:1.75;
+      color:var(--text);background:var(--bg);
+      background-image:
+        radial-gradient(ellipse 90% 55% at 15% 0%,rgba(100,130,210,.11) 0%,transparent 65%),
+        radial-gradient(ellipse 65% 45% at 85% 100%,rgba(80,110,190,.09) 0%,transparent 60%);
+      min-height:100vh;
+    }
     a{color:var(--accent2);text-decoration:none;}
     a:hover{color:var(--accent);text-decoration:underline;}
-    .nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:13px 28px;background:rgba(14,21,37,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-    .brand{font-family:'EB Garamond',Georgia,serif;font-size:1.12rem;font-weight:500;color:var(--heading);letter-spacing:.01em;}
-    .nav-links{display:flex;gap:22px;flex-wrap:wrap;}
-    .nav-links a{color:var(--muted);font-size:.88rem;font-weight:400;letter-spacing:.04em;text-transform:uppercase;}
+
+    /* ── Nav ── */
+    .nav{
+      position:sticky;top:0;z-index:200;
+      display:flex;justify-content:space-between;align-items:center;
+      gap:16px;flex-wrap:wrap;padding:12px 32px;
+      background:rgba(13,20,34,.94);backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+    }
+    .brand{
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:1.08rem;font-weight:500;color:var(--heading);
+      letter-spacing:.02em;
+    }
+    .nav-links{display:flex;gap:20px;flex-wrap:wrap;}
+    .nav-links a{
+      color:var(--muted);font-size:.80rem;font-weight:400;
+      letter-spacing:.07em;text-transform:uppercase;
+      transition:color .2s;
+    }
     .nav-links a:hover{color:var(--accent);text-decoration:none;}
-    .wrap{max-width:1060px;margin:0 auto;padding:40px 24px 80px;}
-    .hero{display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap;padding:44px 40px;margin-bottom:36px;background:var(--surface);border:1px solid var(--border);border-radius:6px;border-top:3px solid var(--accent);box-shadow:0 8px 40px rgba(0,0,0,.28);contain:layout;}
-    .hero-photo img{width:120px;height:120px;border-radius:50%;border:2px solid var(--accent);display:block;filter:grayscale(15%);}
+
+    /* ── Layout ── */
+    .wrap{max-width:1060px;margin:0 auto;padding:44px 24px 90px;}
+
+    /* ── Section labels (Roman numeral style) ── */
+    .section-label{
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:1.3rem;font-weight:500;color:var(--heading);
+      margin-bottom:8px;padding-bottom:10px;
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:baseline;gap:12px;
+      letter-spacing:.01em;
+    }
+    .section-label .rom{
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:.78rem;font-weight:600;color:var(--accent);
+      letter-spacing:.15em;text-transform:uppercase;
+      border:1px solid rgba(201,169,110,.35);
+      padding:2px 8px;border-radius:3px;
+      background:rgba(201,169,110,.06);
+      flex-shrink:0;
+    }
+
+    /* ── Hero ── */
+    .hero{
+      display:flex;align-items:flex-start;gap:44px;flex-wrap:wrap;
+      padding:48px 44px;margin-bottom:36px;
+      background:var(--surface);
+      border:1px solid var(--border);border-radius:var(--radius);
+      border-top:3px solid var(--accent);
+      box-shadow:0 12px 50px rgba(0,0,0,.32);
+      position:relative;overflow:hidden;
+    }
+    .hero::before{
+      content:'';position:absolute;top:-60px;right:-60px;
+      width:320px;height:320px;border-radius:50%;
+      background:radial-gradient(circle,rgba(201,169,110,.07) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .hero-photo{position:relative;flex-shrink:0;}
+    .hero-photo img{
+      width:128px;height:128px;border-radius:50%;display:block;
+      border:2px solid var(--accent);
+      filter:grayscale(10%);
+      box-shadow:0 0 0 5px rgba(201,169,110,.12), 0 0 28px rgba(201,169,110,.20);
+      transition:box-shadow .3s;
+    }
+    .hero-photo img:hover{
+      box-shadow:0 0 0 6px rgba(201,169,110,.22), 0 0 42px rgba(201,169,110,.32);
+    }
     .hero-text{flex:1;min-width:260px;}
-    .affiliation{font-size:.82rem;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-weight:500;}
-    h1{font-family:'EB Garamond',Georgia,serif;font-size:2.5rem;font-weight:500;color:var(--heading);line-height:1.15;margin-bottom:6px;}
-    .title-line{font-size:.93rem;color:var(--muted);margin-bottom:14px;font-style:italic;}
-    .lead{font-size:.97rem;color:#b0bdd5;max-width:680px;margin-bottom:22px;line-height:1.75;}
+    .affiliation{
+      font-size:.79rem;color:var(--accent);
+      text-transform:uppercase;letter-spacing:.12em;
+      margin-bottom:10px;font-weight:500;
+    }
+    h1{
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:2.6rem;font-weight:500;color:var(--heading);
+      line-height:1.1;margin-bottom:4px;letter-spacing:-.01em;
+    }
+    /* thin decorative rule */
+    .hero-rule{
+      width:56px;height:2px;margin:10px 0 10px;
+      background:linear-gradient(90deg,var(--accent),transparent);
+      border:none;
+    }
+    .title-line{
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:1.0rem;color:var(--muted);margin-bottom:4px;font-style:italic;
+      letter-spacing:.01em;
+    }
+    .hero-email{
+      font-size:.80rem;color:#5a7a9a;margin-bottom:18px;
+      letter-spacing:.03em;
+    }
+    .hero-email a{color:#5a8aaa;}
+    .hero-email a:hover{color:var(--accent);}
+    .lead{
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:1.08rem;color:#b8c8e0;
+      max-width:680px;margin-bottom:24px;line-height:1.85;
+      font-style:italic;
+    }
     .btn-row{display:flex;gap:10px;flex-wrap:wrap;}
-    .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:3px;font-size:.84rem;font-weight:500;border:1px solid var(--border);color:var(--muted);background:var(--surface2);transition:border-color .2s,color .2s;will-change:auto;}
-    .btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none;}
-    .btn.primary{background:var(--accent);border-color:var(--accent);color:#1a1000;font-weight:600;}
-    .btn.primary:hover{background:#e0bc84;border-color:#e0bc84;color:#1a1000;}
-    .section-label{font-family:'EB Garamond',Georgia,serif;font-size:1.35rem;font-weight:500;color:var(--heading);margin-bottom:6px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-    .section-label span{display:inline-block;width:28px;height:2px;background:var(--accent);vertical-align:middle;margin-right:10px;margin-bottom:3px;}
-    .about-block{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:32px 36px;margin-bottom:30px;}
-    .about-block p{color:#b4c0d8;font-size:.96rem;line-height:1.85;margin-top:14px;}
-    .about-block p:first-of-type{margin-top:16px;}
+    .btn{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:8px 16px;border-radius:4px;font-size:.83rem;font-weight:500;
+      border:1px solid var(--border);color:var(--muted);background:var(--surface2);
+      transition:border-color .2s,color .2s,background .2s;
+    }
+    .btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.04);text-decoration:none;}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:#1a1000;font-weight:700;}
+    .btn.primary:hover{background:var(--accent-light);border-color:var(--accent-light);color:#1a1000;}
+
+    /* ── About — drop cap ── */
+    .about-block{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius);padding:34px 38px;margin-bottom:30px;
+    }
+    .about-block p{color:#b2bdd8;font-size:.97rem;line-height:1.9;margin-top:16px;}
+    .about-block p:first-of-type{margin-top:18px;}
+    .about-block p:first-of-type::first-letter{
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:3.4rem;font-weight:600;color:var(--accent);
+      float:left;line-height:.78;margin:4px 8px 0 0;
+      text-shadow:0 2px 8px rgba(201,169,110,.25);
+    }
     .about-block strong{color:#dde8f8;font-weight:500;}
-    .thesis-section{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--purple);border-radius:6px;padding:32px 36px;margin-bottom:30px;}
-    .thesis-section .thesis-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;margin-bottom:16px;}
-    .thesis-meta-pill{padding:4px 12px;border-radius:20px;font-size:.76rem;font-weight:600;letter-spacing:.05em;background:rgba(157,133,212,.12);color:var(--purple);border:1px solid rgba(157,133,212,.25);}
-    .thesis-section p{color:#b4c0d8;font-size:.96rem;line-height:1.85;margin-top:12px;}
+
+    /* ── Thesis block ── */
+    .thesis-section{
+      background:var(--surface);border:1px solid var(--border);
+      border-left:4px solid var(--purple);border-radius:var(--radius);
+      padding:34px 38px;margin-bottom:30px;
+      position:relative;overflow:hidden;
+    }
+    .thesis-section::after{
+      content:'DISSERTATION';
+      position:absolute;right:-28px;top:50%;
+      transform:translateY(-50%) rotate(90deg);
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:0.65rem;font-weight:600;letter-spacing:.35em;
+      color:rgba(157,133,212,.10);pointer-events:none;
+      text-transform:uppercase;white-space:nowrap;
+    }
+    .thesis-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;margin-bottom:18px;}
+    .thesis-meta-pill{
+      padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;
+      letter-spacing:.05em;background:rgba(157,133,212,.10);
+      color:var(--purple);border:1px solid rgba(157,133,212,.22);
+    }
+    .thesis-section p{color:#b2bdd8;font-size:.97rem;line-height:1.9;margin-top:14px;}
     .thesis-section strong{color:#dde8f8;font-weight:500;}
-    .thesis-section .thesis-link-row{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;}
-    .impact-section{margin-bottom:30px;}
-    .impact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:18px;}
-    .impact-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:20px 22px;text-align:center;transition:border-color .2s;}
-    .impact-card:hover{border-color:rgba(201,169,110,.4);}
-    .impact-num{font-family:'EB Garamond',Georgia,serif;font-size:2.2rem;font-weight:600;color:var(--accent);line-height:1.1;display:block;}
-    .impact-label{font-size:.80rem;color:var(--muted);margin-top:5px;line-height:1.4;}
-    .impact-note{font-size:.78rem;color:#4a5e7a;margin-top:16px;text-align:right;}
-    .service-section{margin-bottom:30px;}
-    .service-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:18px;}
-    .service-panel{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:24px 28px;}
-    .service-panel h3{font-family:'EB Garamond',Georgia,serif;font-size:1.08rem;font-weight:500;color:var(--heading);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-    .service-list{list-style:none;}
-    .service-list li{padding:9px 0;border-bottom:1px solid rgba(38,52,80,.7);color:#9aabc5;font-size:.88rem;line-height:1.55;}
-    .service-list li:last-child{border-bottom:none;}
-    .service-list strong{color:var(--accent2);font-weight:500;}
+    .thesis-link-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;}
+
+    /* ── Research grid ── */
     .grid2{display:grid;grid-template-columns:1.15fr 0.85fr;gap:24px;margin-bottom:30px;}
-    .panel{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:28px 30px;}
-    .panel h2{font-family:'EB Garamond',Georgia,serif;font-size:1.18rem;font-weight:500;color:var(--heading);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-    .discipline-para{font-size:.90rem;color:#9aabc5;line-height:1.75;margin-bottom:18px;border-left:2px solid var(--accent);padding-left:14px;}
+    .panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px 32px;}
+    .panel h2{
+      font-family:'EB Garamond',Georgia,serif;font-size:1.18rem;font-weight:500;
+      color:var(--heading);margin-bottom:16px;padding-bottom:8px;
+      border-bottom:1px solid var(--border);letter-spacing:.01em;
+    }
+    .discipline-para{
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:.97rem;color:#96aac6;line-height:1.85;margin-bottom:18px;
+      border-left:2px solid var(--accent);padding-left:14px;font-style:italic;
+    }
+    /* Tags — refined pills */
     .tags{display:flex;flex-wrap:wrap;gap:8px;}
-    .tag{padding:5px 12px;border-radius:3px;background:var(--tag-bg);color:var(--tag-text);font-size:.83rem;border:1px solid rgba(126,175,212,.12);letter-spacing:.01em;}
+    .tag{
+      padding:5px 13px;border-radius:20px;
+      background:var(--tag-bg);color:var(--tag-text);
+      font-size:.80rem;border:1px solid rgba(126,175,212,.14);
+      letter-spacing:.02em;transition:border-color .2s,color .2s,transform .15s;
+      cursor:default;
+    }
+    .tag:hover{border-color:rgba(201,169,110,.45);color:var(--accent-light);transform:translateY(-1px);}
     .tool-list{list-style:none;}
-    .tool-list li{padding:9px 0;border-bottom:1px solid rgba(38,52,80,.7);color:#9aabc5;font-size:.88rem;line-height:1.55;}
+    .tool-list li{padding:9px 0;border-bottom:1px solid rgba(36,49,72,.8);color:#8fa5c2;font-size:.88rem;line-height:1.6;}
     .tool-list li:last-child{border-bottom:none;}
     .tool-list strong{color:var(--accent);font-weight:500;}
+
+    /* ── Impact grid ── */
+    .impact-section{margin-bottom:30px;}
+    .impact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px;margin-top:18px;}
+    .impact-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius);padding:22px 20px;text-align:center;
+      transition:border-color .2s,transform .2s,box-shadow .2s;
+      position:relative;overflow:hidden;
+    }
+    .impact-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:var(--card-accent, var(--accent));
+    }
+    .impact-card:hover{border-color:rgba(201,169,110,.35);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.22);}
+    .impact-card.ca-pub  {--card-accent: var(--accent);}
+    .impact-card.ca-data {--card-accent: var(--accent2);}
+    .impact-card.ca-link {--card-accent: var(--green);}
+    .impact-num{
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:2.3rem;font-weight:600;color:var(--accent);
+      line-height:1.05;display:block;
+    }
+    .impact-label{font-size:.79rem;color:var(--muted);margin-top:6px;line-height:1.45;}
+    .impact-note{font-size:.77rem;color:#3e5270;margin-top:16px;text-align:right;}
+
+    /* ── Service ── */
+    .service-section{margin-bottom:30px;}
+    .service-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:18px;}
+    .service-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px 30px;}
+    .service-panel h3{
+      font-family:'EB Garamond',Georgia,serif;font-size:1.08rem;font-weight:500;
+      color:var(--heading);margin-bottom:14px;padding-bottom:8px;
+      border-bottom:1px solid var(--border);letter-spacing:.01em;
+    }
+    .service-list{list-style:none;}
+    .service-list li{padding:9px 0;border-bottom:1px solid rgba(36,49,72,.7);color:#8fa5c2;font-size:.88rem;line-height:1.6;}
+    .service-list li:last-child{border-bottom:none;}
+    .service-list strong{color:var(--accent2);font-weight:500;}
+
+    /* ── Projects ── */
     .projects-section{margin-bottom:30px;}
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:18px;}
-    .project-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:22px 24px;transition:border-color .2s,transform .2s;}
-    .project-card:hover{border-color:rgba(201,169,110,.4);transform:translateY(-2px);}
-    .proj-cat{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);margin-bottom:8px;}
-    .project-card h3{font-family:'EB Garamond',Georgia,serif;font-size:1.05rem;font-weight:500;color:var(--heading);margin-bottom:8px;line-height:1.35;}
+    .project-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius);padding:22px 24px;
+      transition:border-color .2s,transform .2s,box-shadow .2s;
+    }
+    .project-card:hover{border-color:rgba(201,169,110,.38);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.18);}
+    .proj-cat{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:8px;}
+    .project-card h3{font-family:'EB Garamond',Georgia,serif;font-size:1.06rem;font-weight:500;color:var(--heading);margin-bottom:8px;line-height:1.4;}
     .project-card h3 a{color:var(--heading);}
     .project-card h3 a:hover{color:var(--accent);text-decoration:none;}
-    .project-card p{color:var(--muted);font-size:.87rem;line-height:1.6;}
+    .project-card p{color:var(--muted);font-size:.87rem;line-height:1.65;}
+
+    /* ── Publications ── */
     .pub-section{margin-bottom:30px;}
-    .pub-cards{display:flex;flex-direction:column;gap:20px;margin-top:20px;}
-    .pub-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .25s,box-shadow .25s;}
-    .pub-card:hover{border-color:rgba(201,169,110,.45);box-shadow:0 6px 28px rgba(0,0,0,.22);}
+    .pub-cards{display:flex;flex-direction:column;gap:22px;margin-top:20px;}
+    .pub-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius);overflow:hidden;
+      transition:border-color .25s,box-shadow .25s;
+    }
+    .pub-card:hover{border-color:rgba(201,169,110,.42);box-shadow:0 8px 32px rgba(0,0,0,.24);}
     .pub-card.type-journal{border-left:4px solid var(--accent);}
-    .pub-card.type-thesis{border-left:4px solid var(--purple);}
-    .pub-card-inner{padding:24px 28px;}
-    .pub-meta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
-    .pub-type-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;}
-    .type-journal .pub-type-badge{background:rgba(201,169,110,.15);color:var(--accent);border:1px solid rgba(201,169,110,.3);}
-    .type-thesis .pub-type-badge{background:rgba(157,133,212,.15);color:var(--purple);border:1px solid rgba(157,133,212,.3);}
-    .pub-year{font-size:.80rem;font-weight:600;color:var(--muted);letter-spacing:.04em;}
-    .pub-venue-pill{font-size:.78rem;font-style:italic;color:var(--accent2);font-weight:400;}
-    .pub-oa-badge{margin-left:auto;display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:.70rem;font-weight:600;letter-spacing:.05em;background:rgba(93,184,138,.12);color:var(--green);border:1px solid rgba(93,184,138,.25);}
-    .pub-title{font-family:'EB Garamond',Georgia,serif;font-size:1.13rem;font-weight:500;color:var(--heading);line-height:1.45;margin-bottom:6px;}
-    .pub-authors{font-size:.84rem;color:var(--muted);margin-bottom:10px;}
+    .pub-card.type-thesis {border-left:4px solid var(--purple);}
+    .pub-card-inner{padding:26px 30px;}
+    .pub-meta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+    .pub-type-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.71rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;}
+    .type-journal .pub-type-badge{background:rgba(201,169,110,.14);color:var(--accent);border:1px solid rgba(201,169,110,.28);}
+    .type-thesis  .pub-type-badge{background:rgba(157,133,212,.14);color:var(--purple);border:1px solid rgba(157,133,212,.28);}
+    .pub-year{font-size:.79rem;font-weight:700;color:var(--muted);letter-spacing:.05em;}
+    .pub-venue-pill{font-size:.79rem;font-style:italic;color:var(--accent2);}
+    .pub-oa-badge{
+      margin-left:auto;display:inline-flex;align-items:center;gap:4px;
+      padding:2px 9px;border-radius:20px;font-size:.69rem;font-weight:700;
+      letter-spacing:.06em;background:rgba(93,184,138,.10);
+      color:var(--green);border:1px solid rgba(93,184,138,.22);
+    }
+    .pub-title{
+      font-family:'EB Garamond',Georgia,serif;
+      font-size:1.15rem;font-weight:500;color:var(--heading);
+      line-height:1.48;margin-bottom:8px;
+    }
+    .pub-authors{font-size:.84rem;color:var(--muted);margin-bottom:12px;}
     .pub-authors strong{color:#c8d4ec;font-weight:600;}
-    .pub-abstract{font-size:.875rem;color:#8fa3bf;line-height:1.72;margin-bottom:14px;border-left:2px solid var(--border);padding-left:14px;}
+    .pub-abstract{
+      font-size:.875rem;color:#8a9eb8;line-height:1.78;margin-bottom:14px;
+      border-left:2px solid var(--border);padding-left:14px;
+    }
     .pub-keywords{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
-    .pub-kw{padding:3px 10px;border-radius:3px;background:var(--tag-bg);color:var(--tag-text);font-size:.76rem;border:1px solid rgba(126,175,212,.10);letter-spacing:.01em;}
-    .pub-footer-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--border);}
-    .pub-doi{font-size:.76rem;color:#5a6e8a;font-family:'Inter',monospace;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .pub-doi a{color:#5a7a9a;}
-    .pub-doi a:hover{color:var(--accent2);text-decoration:underline;}
-    .pub-action{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:4px;font-size:.81rem;font-weight:500;border:1px solid var(--border);background:var(--surface2);color:var(--accent2);transition:border-color .2s,color .2s,background .2s;white-space:nowrap;}
-    .pub-action:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.06);text-decoration:none;}
-    .pub-action.primary-action{background:rgba(126,175,212,.1);border-color:rgba(126,175,212,.35);}
-    .pub-action.primary-action:hover{background:rgba(201,169,110,.08);border-color:var(--accent);color:var(--accent);}
+    .pub-kw{
+      padding:3px 10px;border-radius:20px;
+      background:var(--tag-bg);color:var(--tag-text);
+      font-size:.75rem;border:1px solid rgba(126,175,212,.10);
+    }
+    .pub-footer-row{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      padding-top:14px;border-top:1px solid var(--border);
+    }
+    .pub-doi{font-size:.75rem;color:#506278;font-family:'Inter',monospace;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .pub-doi a{color:#567090;}
+    .pub-doi a:hover{color:var(--accent2);}
+    .pub-action{
+      display:inline-flex;align-items:center;gap:5px;
+      padding:6px 14px;border-radius:4px;font-size:.81rem;font-weight:500;
+      border:1px solid var(--border);background:var(--surface2);color:var(--accent2);
+      transition:border-color .2s,color .2s,background .2s;white-space:nowrap;
+    }
+    .pub-action:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.05);text-decoration:none;}
+    .pub-action.primary-action{background:rgba(126,175,212,.08);border-color:rgba(126,175,212,.32);}
+    .pub-action.primary-action:hover{background:rgba(201,169,110,.06);border-color:var(--accent);color:var(--accent);}
+
+    /* ── Profiles — icon cards ── */
     .profiles-section{margin-bottom:30px;}
-    .profiles-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;}
-    .profile-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:4px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:.88rem;font-weight:500;transition:all .2s;}
-    .profile-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.05);text-decoration:none;}
+    .profiles-grid{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;}
+    .profile-btn{
+      display:inline-flex;align-items:center;gap:12px;
+      padding:14px 22px;border-radius:var(--radius);
+      border:1px solid var(--border);background:var(--surface);
+      color:var(--muted);font-size:.88rem;font-weight:500;
+      transition:border-color .2s,color .2s,background .2s,transform .15s;
+      min-width:160px;
+    }
+    .profile-btn:hover{
+      border-color:var(--accent);color:var(--accent);
+      background:rgba(201,169,110,.04);
+      text-decoration:none;transform:translateY(-1px);
+    }
+    .profile-btn .picon{font-size:1.15rem;line-height:1;flex-shrink:0;}
+    .profile-btn .plabel{display:flex;flex-direction:column;gap:1px;}
+    .profile-btn .plabel span{font-size:.70rem;color:#3e5270;font-weight:400;letter-spacing:.03em;}
+
+    /* ── Contact ── */
     .contact-section{margin-bottom:30px;margin-top:10px;}
-    .contact-form{background:var(--surface2);border:1px solid rgba(201,169,110,.35);border-top:3px solid var(--accent);border-radius:8px;padding:36px 40px;box-shadow:0 0 40px rgba(201,169,110,.07), 0 8px 32px rgba(0,0,0,.25);}
-    .contact-form>p{color:#b4c2d8;font-size:.95rem;margin:14px 0 0;line-height:1.75;}
-    .contact-form>p strong{color:var(--heading);font-weight:600;}
+    .contact-form{
+      background:var(--surface2);
+      border:1px solid rgba(201,169,110,.30);border-top:3px solid var(--accent);
+      border-radius:var(--radius);padding:38px 42px;
+      box-shadow:0 0 48px rgba(201,169,110,.06),0 10px 36px rgba(0,0,0,.26);
+    }
+    .contact-form > p{color:#b0bfd6;font-size:.96rem;margin:14px 0 0;line-height:1.8;}
+    .contact-form > p strong{color:var(--heading);font-weight:600;}
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;}
     .form-group{display:flex;flex-direction:column;gap:6px;}
     .form-group.full{grid-column:1/-1;}
-    .form-group label{font-size:.80rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;}
-    .req-star{color:#e05555;margin-left:3px;font-weight:700;}
-    .form-group input,.form-group textarea,.form-group select{background:#0f1a2e;border:1px solid var(--border);border-radius:5px;padding:10px 14px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;transition:border-color .2s, box-shadow .2s;outline:none;}
-    .form-group input::placeholder,.form-group textarea::placeholder{color:#4a5e7a;}
-    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(201,169,110,.15);}
+    .form-group label{font-size:.78rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.09em;}
+    .req-star{color:#e05555;margin-left:3px;}
+    .form-group input,.form-group textarea,.form-group select{
+      background:#0c1726;border:1px solid var(--border);border-radius:5px;
+      padding:10px 14px;color:var(--text);
+      font-family:'Inter',sans-serif;font-size:.9rem;
+      transition:border-color .2s,box-shadow .2s;outline:none;
+    }
+    .form-group input::placeholder,.form-group textarea::placeholder{color:#3e5270;}
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+      border-color:var(--accent);box-shadow:0 0 0 3px rgba(201,169,110,.13);
+    }
     .form-group textarea{resize:vertical;min-height:130px;}
-    .form-group select option{background:#0f1a2e;color:var(--text);}
+    .form-group select option{background:#0c1726;color:var(--text);}
     .form-submit-row{margin-top:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;grid-column:1/-1;}
-    .btn-submit{display:inline-flex;align-items:center;gap:8px;padding:11px 28px;border-radius:4px;background:var(--accent);border:none;color:#1a1000;font-size:.92rem;font-weight:700;cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 3px 14px rgba(201,169,110,.30);}
-    .btn-submit:hover{background:#e0bc84;transform:translateY(-1px);box-shadow:0 5px 20px rgba(201,169,110,.45);}
-    .form-note{font-size:.80rem;color:var(--muted);}
-    @media(max-width:600px){.form-grid{grid-template-columns:1fr;}.contact-form{padding:26px 20px;}.service-grid{grid-column:1fr;}}
-    footer{margin-top:60px;padding:24px 0 10px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:.82rem;}
+    .btn-submit{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:11px 30px;border-radius:4px;
+      background:var(--accent);border:none;color:#1a1000;
+      font-size:.92rem;font-weight:700;cursor:pointer;
+      transition:background .2s,transform .15s,box-shadow .2s;
+      box-shadow:0 3px 16px rgba(201,169,110,.28);
+    }
+    .btn-submit:hover{background:var(--accent-light);transform:translateY(-1px);box-shadow:0 6px 22px rgba(201,169,110,.42);}
+    .form-note{font-size:.79rem;color:var(--muted);}
+
+    /* ── Footer ── */
+    footer{
+      margin-top:70px;padding:26px 0 12px;
+      border-top:1px solid var(--border);
+      text-align:center;color:var(--muted);font-size:.82rem;
+    }
+    .footer-ornament{
+      font-size:1.1rem;color:rgba(201,169,110,.35);
+      margin-bottom:10px;display:block;letter-spacing:.5em;
+    }
     footer a{color:var(--muted);}
     footer a:hover{color:var(--accent);}
-    @media(max-width:860px){.grid2{grid-template-columns:1fr;}h1{font-size:2.1rem;}.hero{padding:32px 24px;}.about-block{padding:26px 22px;}.pub-card-inner{padding:20px 20px;}.service-grid{grid-template-columns:1fr;}}
-    @media(max-width:560px){.hero{flex-direction:column;gap:22px;}.hero-photo img{width:90px;height:90px;}h1{font-size:1.85rem;}.nav{padding:12px 16px;}.pub-oa-badge{margin-left:0;}.impact-grid{grid-template-columns:1fr 1fr;}}
+
+    /* ── Responsive ── */
+    @media(max-width:860px){
+      .grid2{grid-template-columns:1fr;}
+      h1{font-size:2.15rem;}
+      .hero{padding:34px 26px;}
+      .about-block,.thesis-section{padding:28px 24px;}
+      .pub-card-inner{padding:20px 22px;}
+      .contact-form{padding:28px 22px;}
+    }
+    @media(max-width:600px){
+      .form-grid{grid-template-columns:1fr;}
+      .profiles-grid{flex-direction:column;}
+      .profile-btn{min-width:unset;}
+    }
+    @media(max-width:560px){
+      .hero{flex-direction:column;gap:22px;}
+      .hero-photo img{width:96px;height:96px;}
+      h1{font-size:1.9rem;}
+      .nav{padding:12px 16px;}
+      .pub-oa-badge{margin-left:0;}
+      .impact-grid{grid-template-columns:1fr 1fr;}
+    }
   </style>
 </head>
 <body>
+
+  <div id="scroll-bar"></div>
 
   <nav class="nav">
     <div class="brand">Sawood Anwar, PhD</div>
@@ -195,134 +487,156 @@
 
   <div class="wrap">
 
+    <!-- HERO -->
     <section class="hero" id="top">
       <div class="hero-photo">
-        <img src="https://github.com/sawoodanwar.png" alt="Sawood Anwar, PhD — Computational Social Scientist" width="120" height="120" loading="eager" fetchpriority="high" />
+        <img src="https://github.com/sawoodanwar.png"
+             alt="Sawood Anwar, PhD — Computational Social Scientist"
+             width="128" height="128" loading="eager" fetchpriority="high" />
       </div>
       <div class="hero-text">
-        <div class="affiliation">University of Urbino Carlo Bo &nbsp;·&nbsp; DISCUI</div>
+        <div class="affiliation">University of Urbino Carlo Bo &nbsp;&middot;&nbsp; DISCUI</div>
         <h1>Sawood Anwar</h1>
-        <p class="title-line">PhD in Humanities (Text &amp; Communication Sciences) &nbsp;·&nbsp; Early Career Researcher</p>
+        <hr class="hero-rule">
+        <p class="title-line">PhD in Humanities (Text &amp; Communication Sciences) &nbsp;&middot;&nbsp; Early Career Researcher</p>
+        <p class="hero-email">&#9993;&nbsp;<a href="mailto:anwar1524@gmail.com">anwar1524@gmail.com</a></p>
         <p class="lead">Computational social scientist working at the intersection of natural language processing, social media analysis, and computational communication. My research investigates how digital platforms mediate public emotion and information during societal crises.</p>
         <div class="btn-row">
-          <a class="btn primary" href="https://scholar.google.com/citations?user=Z2kACpkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer me">Google Scholar</a>
-          <a class="btn" href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer me">ORCID</a>
-          <a class="btn" href="https://github.com/sawoodanwar" target="_blank" rel="noopener noreferrer me">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/sawood-anwar/" target="_blank" rel="noopener noreferrer me">LinkedIn</a>
+          <a class="btn primary" href="https://scholar.google.com/citations?user=Z2kACpkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer me">&#128218; Google Scholar</a>
+          <a class="btn" href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer me">&#9651; ORCID</a>
+          <a class="btn" href="https://github.com/sawoodanwar" target="_blank" rel="noopener noreferrer me">&#128736; GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/sawood-anwar/" target="_blank" rel="noopener noreferrer me">&#128101; LinkedIn</a>
         </div>
       </div>
     </section>
 
+    <!-- ABOUT -->
     <section class="about-block" id="about">
-      <div class="section-label"><span></span>About</div>
+      <div class="section-label"><span class="rom">I</span>About</div>
       <p>I am an early career researcher working at the intersection of computational communication, social media analysis, and natural language processing. I hold a <strong>Ph.D. in Humanities</strong> (Curriculum: Text and Communication Sciences, Cycle XXXVII) from the Department of Communication Sciences, Humanities and International Studies (<strong>DISCUI</strong>), University of Urbino Carlo Bo, Italy, defended in September 2025. My doctoral programme was coordinated by <strong>Prof. Liana Lomiento</strong>, supervised by <strong>Prof. Fabio Giglietto</strong>, and co-supervised by <strong>Prof. Giovanni Boccia Artieri</strong>.</p>
-      <p>My doctoral research examined <strong>Facebook Reactions as emotional indicators</strong> of public engagement with COVID-19 pandemic news on Indian media platforms (March 2020 – March 2022). Using a multi-method approach — time-series analysis, embedding-based topic modelling, a <strong>Large Language Model (LLM)-driven semantic synthesis</strong> approach for topic cluster interpretation, and lexicon-based sentiment analysis — I analysed a corpus of <strong>68,319 Facebook posts</strong> from four major English-language Indian news outlets, with a focused subset of 8,622 posts for the early pandemic phase.</p>
+      <p>My doctoral research examined <strong>Facebook Reactions as emotional indicators</strong> of public engagement with COVID-19 pandemic news on Indian media platforms (March 2020 &ndash; March 2022). Using a multi-method approach &mdash; time-series analysis, embedding-based topic modelling, a <strong>Large Language Model (LLM)-driven semantic synthesis</strong> approach for topic cluster interpretation, and lexicon-based sentiment analysis &mdash; I analysed a corpus of <strong>68,319 Facebook posts</strong> from four major English-language Indian news outlets, with a focused subset of 8,622 posts for the early pandemic phase.</p>
     </section>
 
+    <!-- THESIS -->
     <section class="thesis-section" id="thesis" itemscope itemtype="https://schema.org/Thesis">
-      <div class="section-label"><span></span>Doctoral Thesis</div>
+      <div class="section-label"><span class="rom">II</span>Doctoral Thesis</div>
       <div class="thesis-meta">
-        <span class="thesis-meta-pill">PhD Dissertation · 2025</span>
+        <span class="thesis-meta-pill">PhD Dissertation &middot; 2025</span>
         <span class="thesis-meta-pill">University of Urbino Carlo Bo</span>
         <span class="thesis-meta-pill">Cycle XXXVII</span>
         <span class="thesis-meta-pill">GSPS-06/A</span>
         <span class="thesis-meta-pill">Open Access</span>
       </div>
-      <h2 itemprop="name" style="font-family:'EB Garamond',Georgia,serif;font-size:1.18rem;font-weight:500;color:var(--heading);line-height:1.45;margin-bottom:12px;">&ldquo;Facebook Reactions&rdquo; as Emotional Indicators: A Multi-Method Approach to Analyzing User Engagement with COVID-19 News on Indian Media Platforms</h2>
-      <p itemprop="abstract">This thesis investigates the role of <strong>Facebook Reactions</strong> as indicators of public sentiment and engagement with COVID-19 pandemic-related news in India during different stages of the pandemic, ranging from <strong>March 24, 2020 to March 31, 2022</strong>. The work employs a <strong>mixed-methods approach</strong> combining time-series analysis with embedding-based topic modelling, GPT-4-assisted cluster labelling, and lexicon-based sentiment analysis to examine a dataset of <strong>68,319 Facebook posts</strong> and a focused subset of <strong>8,622 posts</strong> analysed for the early stages of the pandemic (March 24 – April 14, 2020) to capture initial public responses.</p>
+      <h2 itemprop="name" style="font-family:'EB Garamond',Georgia,serif;font-size:1.2rem;font-weight:500;color:var(--heading);line-height:1.48;margin-bottom:12px;">&ldquo;Facebook Reactions&rdquo; as Emotional Indicators: A Multi-Method Approach to Analyzing User Engagement with COVID-19 News on Indian Media Platforms</h2>
+      <p itemprop="abstract">This thesis investigates the role of <strong>Facebook Reactions</strong> as indicators of public sentiment and engagement with COVID-19 pandemic-related news in India during different stages of the pandemic, ranging from <strong>March 24, 2020 to March 31, 2022</strong>. The work employs a <strong>mixed-methods approach</strong> combining time-series analysis with embedding-based topic modelling, GPT-4-assisted cluster labelling, and lexicon-based sentiment analysis to examine a dataset of <strong>68,319 Facebook posts</strong> and a focused subset of <strong>8,622 posts</strong> analysed for the early stages of the pandemic (March 24 &ndash; April 14, 2020) to capture initial public responses.</p>
       <p>Data is derived from four major English-language Indian news outlets: <em>The Times of India</em>, <em>The Hindu</em>, <em>Indian Express</em>, and <em>Hindustan Times</em>. The thesis contributes an operationalised framework for treating platform-native reaction affordances as fine-grained proxies for public affect, offering methodological and substantive contributions to the fields of computational communication, health communication, and platform studies.</p>
-      <p style="font-size:.85rem;color:var(--muted);margin-top:10px;"><strong style="color:#c8d4ec;">Supervisors:</strong> Prof. Fabio Giglietto (Supervisor) &nbsp;&middot;&nbsp; Prof. Giovanni Boccia Artieri (Co-Supervisor) &nbsp;&middot;&nbsp; Coordinator: Prof. Liana Lomiento</p>
+      <p style="font-size:.85rem;color:var(--muted);margin-top:12px;"><strong style="color:#c8d4ec;">Supervisors:</strong> Prof. Fabio Giglietto (Supervisor) &nbsp;&middot;&nbsp; Prof. Giovanni Boccia Artieri (Co-Supervisor) &nbsp;&middot;&nbsp; Coordinator: Prof. Liana Lomiento</p>
       <div class="thesis-link-row">
         <a class="pub-action primary-action" href="https://ora.uniurb.it/handle/11576/2761691" target="_blank" rel="noopener noreferrer" itemprop="url">&#8599; View in Institutional Repository (ORA)</a>
       </div>
     </section>
 
+    <!-- RESEARCH -->
     <section class="grid2" id="research">
       <div class="panel">
-        <h2>Research Interests</h2>
-        <p class="discipline-para">My work sits within <strong>computational communication research</strong>, drawing on methods from NLP and data science to study how platform affordances shape collective emotion, public discourse, and information diffusion — with a particular focus on health crises and the Global South.</p>
+        <h2><span style="color:var(--accent);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-right:10px;font-family:'Inter',sans-serif;">III</span>Research Interests</h2>
+        <p class="discipline-para">My work sits within <strong>computational communication research</strong>, drawing on methods from NLP and data science to study how platform affordances shape collective emotion, public discourse, and information diffusion &mdash; with a particular focus on health crises and the Global South.</p>
         <div class="tags">
-          <span class="tag">Computational Communication</span><span class="tag">Social Media Analysis</span><span class="tag">Natural Language Processing</span><span class="tag">Topic Modelling</span><span class="tag">Sentiment Analysis</span><span class="tag">Time-Series Analysis</span><span class="tag">Health Communication</span><span class="tag">Political Communication</span><span class="tag">Misinformation Research</span><span class="tag">Digital Methods</span><span class="tag">Survey Methods</span><span class="tag">Platform Studies</span>
+          <span class="tag">Computational Communication</span>
+          <span class="tag">Social Media Analysis</span>
+          <span class="tag">Natural Language Processing</span>
+          <span class="tag">Topic Modelling</span>
+          <span class="tag">Sentiment Analysis</span>
+          <span class="tag">Time-Series Analysis</span>
+          <span class="tag">Health Communication</span>
+          <span class="tag">Political Communication</span>
+          <span class="tag">Misinformation Research</span>
+          <span class="tag">Digital Methods</span>
+          <span class="tag">Survey Methods</span>
+          <span class="tag">Platform Studies</span>
         </div>
       </div>
       <div class="panel">
         <h2>Methods &amp; Tools</h2>
         <ul class="tool-list">
-          <li><strong>R</strong> — tidyverse, quanteda, stm, tidytext, psych, lavaan, ggplot2</li>
-          <li><strong>Python</strong> — scikit-learn, BERTopic, sentence-transformers, NLP pipelines</li>
-          <li><strong>Methods</strong> — topic modelling, sentiment analysis, time-series, content coding, survey analysis</li>
-          <li><strong>Data Sources</strong> — Meta platforms, Reddit, CrowdTangle, Meta Content Library API</li>
-          <li><strong>LLM Integration</strong> — LLM-driven semantic synthesis for topic cluster interpretation and thematic annotation</li>
+          <li><strong>R</strong> &mdash; tidyverse, quanteda, stm, tidytext, psych, lavaan, ggplot2</li>
+          <li><strong>Python</strong> &mdash; scikit-learn, BERTopic, sentence-transformers, NLP pipelines</li>
+          <li><strong>Methods</strong> &mdash; topic modelling, sentiment analysis, time-series, content coding, survey analysis</li>
+          <li><strong>Data Sources</strong> &mdash; Meta platforms, Reddit, CrowdTangle, Meta Content Library API</li>
+          <li><strong>LLM Integration</strong> &mdash; LLM-driven semantic synthesis for topic cluster interpretation and thematic annotation</li>
         </ul>
       </div>
     </section>
 
+    <!-- IMPACT -->
     <section class="impact-section" id="impact">
-      <div class="section-label"><span></span>Research Impact</div>
+      <div class="section-label"><span class="rom">IV</span>Research Impact</div>
       <div class="impact-grid">
-        <div class="impact-card">
+        <div class="impact-card ca-pub">
           <span class="impact-num">1</span>
-          <div class="impact-label">Peer-Reviewed Journal Article<br><em style="color:#4a5e7a;">Frontiers in Sociology, 2024</em></div>
+          <div class="impact-label">Peer-Reviewed Journal Article<br><em style="color:#3e5270;">Frontiers in Sociology, 2024</em></div>
         </div>
-        <div class="impact-card">
+        <div class="impact-card ca-pub">
           <span class="impact-num">1</span>
-          <div class="impact-label">Doctoral Dissertation<br><em style="color:#4a5e7a;">University of Urbino, 2025</em></div>
+          <div class="impact-label">Doctoral Dissertation<br><em style="color:#3e5270;">University of Urbino, 2025</em></div>
         </div>
-        <div class="impact-card">
+        <div class="impact-card ca-data">
           <span class="impact-num">68K+</span>
-          <div class="impact-label">Facebook Posts Analysed<br><em style="color:#4a5e7a;">Across 4 Indian news outlets</em></div>
+          <div class="impact-label">Facebook Posts Analysed<br><em style="color:#3e5270;">Across 4 Indian news outlets</em></div>
         </div>
-        <div class="impact-card">
+        <div class="impact-card ca-data">
           <span class="impact-num">2+</span>
-          <div class="impact-label">Years of Pandemic Data<br><em style="color:#4a5e7a;">March 2020 – March 2022</em></div>
+          <div class="impact-label">Years of Pandemic Data<br><em style="color:#3e5270;">March 2020 &ndash; March 2022</em></div>
         </div>
-        <div class="impact-card">
+        <div class="impact-card ca-link">
           <a href="https://scholar.google.com/citations?user=Z2kACpkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer me" style="text-decoration:none;display:block;">
-            <span class="impact-num" style="font-size:1.55rem;">Scholar</span>
-            <div class="impact-label">View citations &amp; h-index<br><em style="color:#4a5e7a;">Google Scholar profile ↗</em></div>
+            <span class="impact-num" style="font-size:1.5rem;">Scholar</span>
+            <div class="impact-label">View citations &amp; h-index<br><em style="color:#3e5270;">Google Scholar profile &#8599;</em></div>
           </a>
         </div>
-        <div class="impact-card">
+        <div class="impact-card ca-link">
           <a href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer me" style="text-decoration:none;display:block;">
-            <span class="impact-num" style="font-size:1.55rem;">ORCID</span>
-            <div class="impact-label">Verified research record<br><em style="color:#4a5e7a;">0009-0000-2819-9179 ↗</em></div>
+            <span class="impact-num" style="font-size:1.5rem;">ORCID</span>
+            <div class="impact-label">Verified research record<br><em style="color:#3e5270;">0009-0000-2819-9179 &#8599;</em></div>
           </a>
         </div>
       </div>
       <p class="impact-note">Citation counts updated on Google Scholar. Last checked July 2026.</p>
     </section>
 
+    <!-- SERVICE -->
     <section class="service-section" id="service">
-      <div class="section-label"><span></span>Academic Service</div>
+      <div class="section-label"><span class="rom">V</span>Academic Service</div>
       <div class="service-grid">
         <div class="service-panel">
           <h3>Conferences &amp; Talks</h3>
           <ul class="service-list">
-            <li><strong>PSA 75th Annual Conference</strong> — &ldquo;Sentiment analysis and topic modeling of COVID-19 news coverage in India&rdquo; (Birmingham, UK, April 2025)</li>
-            <li><strong>Media Sociology Symposium / CITAMS</strong> — &ldquo;Decoding digital emotions: How Facebook reactions reveal public sentiment patterns in Indian COVID-19 news coverage&rdquo; (Virtual, August 2025)</li>
-            <li><strong>Memberships</strong> — ECREA, ECPR, AoIR, PSA</li>
+            <li><strong>PSA 75th Annual Conference</strong> &mdash; &ldquo;Sentiment analysis and topic modeling of COVID-19 news coverage in India&rdquo; (Birmingham, UK, April 2025)</li>
+            <li><strong>Media Sociology Symposium / CITAMS</strong> &mdash; &ldquo;Decoding digital emotions: How Facebook reactions reveal public sentiment patterns in Indian COVID-19 news coverage&rdquo; (Virtual, August 2025)</li>
+            <li><strong>Memberships</strong> &mdash; ECREA, ECPR, AoIR, PSA</li>
           </ul>
         </div>
       </div>
     </section>
 
+    <!-- PROJECTS -->
     <section class="projects-section" id="projects">
-      <div class="section-label"><span></span>Research Projects &amp; Code</div>
+      <div class="section-label"><span class="rom">VI</span>Research Projects &amp; Code</div>
       <div class="projects-grid">
         <article class="project-card">
           <div class="proj-cat">Doctoral Research</div>
           <h3><a href="https://github.com/sawoodanwar/facebook-reactions-covid19-india" target="_blank" rel="noopener noreferrer">facebook-reactions-covid19-india</a></h3>
-          <p>Multi-method analysis of Facebook Reactions as emotional indicators of public engagement with COVID-19 news across Indian media platforms (2020–2022).</p>
+          <p>Multi-method analysis of Facebook Reactions as emotional indicators of public engagement with COVID-19 news across Indian media platforms (2020&ndash;2022).</p>
         </article>
         <article class="project-card">
           <div class="proj-cat">Time-Series Analysis</div>
           <h3><a href="https://github.com/sawoodanwar/timeseries-facebook-engagement-r" target="_blank" rel="noopener noreferrer">timeseries-facebook-engagement-r</a></h3>
-          <p>Reusable R workflows for digital engagement data — anomaly detection, event-spike analysis, and longitudinal visualisation.</p>
+          <p>Reusable R workflows for digital engagement data &mdash; anomaly detection, event-spike analysis, and longitudinal visualisation.</p>
         </article>
         <article class="project-card">
           <div class="proj-cat">Topic Modelling</div>
           <h3><a href="https://github.com/sawoodanwar/stm-social-media-r" target="_blank" rel="noopener noreferrer">stm-social-media-r</a></h3>
-          <p>Structural Topic Model (STM) workflow in R — preprocessing, model fitting, covariate specification, and result interpretation.</p>
+          <p>Structural Topic Model (STM) workflow in R &mdash; preprocessing, model fitting, covariate specification, and result interpretation.</p>
         </article>
         <article class="project-card">
           <div class="proj-cat">Embedding-Based NLP</div>
@@ -337,13 +651,14 @@
         <article class="project-card">
           <div class="proj-cat">Coding Framework</div>
           <h3><a href="https://github.com/sawoodanwar/reddit-political-misinfo-coding" target="_blank" rel="noopener noreferrer">reddit-political-misinfo-coding</a></h3>
-          <p>Manual coding framework for political communication and misinformation research on Reddit — codebook, reliability checks, and annotation guide.</p>
+          <p>Manual coding framework for political communication and misinformation research on Reddit &mdash; codebook, reliability checks, and annotation guide.</p>
         </article>
       </div>
     </section>
 
+    <!-- PUBLICATIONS -->
     <section class="pub-section" id="publications">
-      <div class="section-label"><span></span>Selected Publications</div>
+      <div class="section-label"><span class="rom">VII</span>Selected Publications</div>
       <div class="pub-cards">
         <article class="pub-card type-journal" itemscope itemtype="https://schema.org/ScholarlyArticle">
           <div class="pub-card-inner">
@@ -355,7 +670,7 @@
             </div>
             <h2 class="pub-title" itemprop="name">Facebook Reactions as Emotional Indicators: Analyzing Public Engagement with COVID-19 Pandemic News on Indian Media Platforms During the Early Lockdown Phase</h2>
             <p class="pub-authors"><strong itemprop="author">Anwar, S.</strong></p>
-            <p class="pub-abstract" itemprop="abstract">This study investigates Facebook Reactions as proxies for emotional public response to COVID-19 pandemic news shared by major Indian media outlets during the early lockdown phase (March–April 2020). Combining lexicon-based sentiment analysis with embedding-based topic modelling and time-series techniques, the analysis reveals how discrete reaction types — Like, Love, Haha, Wow, Sad, Angry — track shifting public affect across dominant news themes.</p>
+            <p class="pub-abstract" itemprop="abstract">This study investigates Facebook Reactions as proxies for emotional public response to COVID-19 pandemic news shared by major Indian media outlets during the early lockdown phase (March&ndash;April 2020). Combining lexicon-based sentiment analysis with embedding-based topic modelling and time-series techniques, the analysis reveals how discrete reaction types &mdash; Like, Love, Haha, Wow, Sad, Angry &mdash; track shifting public affect across dominant news themes.</p>
             <div class="pub-keywords">
               <span class="pub-kw">Facebook Reactions</span><span class="pub-kw">COVID-19</span><span class="pub-kw">Sentiment Analysis</span><span class="pub-kw">Indian Media</span><span class="pub-kw">Social Media Engagement</span><span class="pub-kw">Health Communication</span>
             </div>
@@ -375,7 +690,7 @@
             </div>
             <h2 class="pub-title" itemprop="name">&ldquo;Facebook Reactions&rdquo; as Emotional Indicators: A Multi-Method Approach to Analyzing User Engagement with COVID-19 News on Indian Media Platforms</h2>
             <p class="pub-authors"><strong itemprop="author">Anwar, S.</strong> &nbsp;&mdash;&nbsp; <span style="font-size:.82rem;color:var(--muted);">Supervisors: Prof. F. Giglietto &amp; Prof. G. Boccia Artieri</span></p>
-            <p class="pub-abstract" itemprop="abstract">This thesis investigates Facebook Reactions as indicators of public sentiment and engagement with COVID-19 news in India (March 2020 – March 2022). A mixed-methods approach combines time-series analysis, embedding-based topic modelling, LLM-driven semantic cluster labelling, and lexicon-based sentiment analysis across a corpus of 68,319 Facebook posts from four major English-language Indian news outlets, with a focused subset of 8,622 posts for the early pandemic phase.</p>
+            <p class="pub-abstract" itemprop="abstract">This thesis investigates Facebook Reactions as indicators of public sentiment and engagement with COVID-19 news in India (March 2020 &ndash; March 2022). A mixed-methods approach combines time-series analysis, embedding-based topic modelling, LLM-driven semantic cluster labelling, and lexicon-based sentiment analysis across a corpus of 68,319 Facebook posts from four major English-language Indian news outlets, with a focused subset of 8,622 posts for the early pandemic phase.</p>
             <div class="pub-keywords">
               <span class="pub-kw">Facebook Reactions</span><span class="pub-kw">COVID-19</span><span class="pub-kw">Topic Modelling</span><span class="pub-kw">BERTopic</span><span class="pub-kw">Time-Series Analysis</span><span class="pub-kw">Computational Communication</span><span class="pub-kw">India</span>
             </div>
@@ -388,24 +703,34 @@
       </div>
     </section>
 
+    <!-- PROFILES -->
     <section class="profiles-section" id="profiles">
-      <div class="section-label"><span></span>Academic Profiles</div>
+      <div class="section-label"><span class="rom">VIII</span>Academic Profiles</div>
       <div class="profiles-grid">
-        <a class="profile-btn" href="https://scholar.google.com/citations?user=Z2kACpkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer me">Google Scholar</a>
-        <a class="profile-btn" href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer me">ORCID</a>
-        <a class="profile-btn" href="https://github.com/sawoodanwar" target="_blank" rel="noopener noreferrer me">GitHub</a>
-        <a class="profile-btn" href="https://www.linkedin.com/in/sawood-anwar/" target="_blank" rel="noopener noreferrer me">LinkedIn</a>
+        <a class="profile-btn" href="https://scholar.google.com/citations?user=Z2kACpkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer me">
+          <span class="picon">&#128218;</span>
+          <span class="plabel">Google Scholar<span>Citations &amp; h-index</span></span>
+        </a>
+        <a class="profile-btn" href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer me">
+          <span class="picon">&#9651;</span>
+          <span class="plabel">ORCID<span>0009-0000-2819-9179</span></span>
+        </a>
+        <a class="profile-btn" href="https://github.com/sawoodanwar" target="_blank" rel="noopener noreferrer me">
+          <span class="picon">&#128736;</span>
+          <span class="plabel">GitHub<span>sawoodanwar</span></span>
+        </a>
+        <a class="profile-btn" href="https://www.linkedin.com/in/sawood-anwar/" target="_blank" rel="noopener noreferrer me">
+          <span class="picon">&#128101;</span>
+          <span class="plabel">LinkedIn<span>sawood-anwar</span></span>
+        </a>
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section class="contact-section" id="contact">
-      <div class="section-label"><span></span>Contact Me</div>
+      <div class="section-label"><span class="rom">IX</span>Contact</div>
       <div class="contact-form">
-        <p>Whether you are a <strong>fellow researcher</strong>,
-        a <strong>prospective collaborator</strong>, a
-        <strong>journal editor</strong>, or simply curious about
-        my work — I welcome every message. Write to me and I will get back to you
-        as soon as possible.</p>
+        <p>Whether you are a <strong>fellow researcher</strong>, a <strong>prospective collaborator</strong>, a <strong>journal editor</strong>, or simply curious about my work &mdash; I welcome every message. Write to me and I will get back to you as soon as possible.</p>
         <form class="form-grid" action="https://formspree.io/f/mykrezlk" method="POST">
           <div class="form-group">
             <label for="cf-name">Your Name<span class="req-star" aria-hidden="true">*</span></label>
@@ -445,11 +770,25 @@
     </section>
 
     <footer>
-      <p>Sawood Anwar, PhD &nbsp;·&nbsp; Urbino, Italy</p>
-      <p style="margin-top:6px;color:#4a5a78;">Last updated July 2026</p>
+      <span class="footer-ornament">&#8258;</span>
+      <p>Sawood Anwar, PhD &nbsp;&middot;&nbsp; Urbino, Italy &nbsp;&middot;&nbsp; <a href="mailto:anwar1524@gmail.com">anwar1524@gmail.com</a></p>
+      <p style="margin-top:5px;color:#3a5068;">ORCID: <a href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer me">0009-0000-2819-9179</a> &nbsp;&middot;&nbsp; Last updated July 2026</p>
     </footer>
 
   </div>
+
+  <script>
+    (function(){
+      var bar = document.getElementById('scroll-bar');
+      function upd(){
+        var s = document.documentElement;
+        var pct = (s.scrollTop||document.body.scrollTop) / ((s.scrollHeight||document.body.scrollHeight) - s.clientHeight) * 100;
+        bar.style.width = Math.min(pct,100) + '%';
+      }
+      window.addEventListener('scroll', upd, {passive:true});
+      upd();
+    })();
+  </script>
 
 </body>
 </html>
