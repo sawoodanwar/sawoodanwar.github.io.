@@ -358,13 +358,14 @@
       <div class="impact-grid">
         <div class="impact-card ca-pub"><span class="impact-num">1</span><div class="impact-label">Peer-Reviewed Journal Article<br><em style="color:#3e5270;">Frontiers in Sociology, 2024</em></div></div>
         <div class="impact-card ca-pub"><span class="impact-num">1</span><div class="impact-label">Doctoral Dissertation<br><em style="color:#3e5270;">University of Urbino, 2025</em></div></div>
-        <div class="impact-card ca-data" id="citation-card"><span class="impact-num" id="citation-count">&#8212;</span><div class="impact-label">Semantic Scholar Citations<br><em style="color:#3e5270;" id="citation-date">Auto-updated weekly</em></div></div>
+        <div class="impact-card ca-data" id="citation-card-ss"><span class="impact-num" id="citation-count-ss">&#8212;</span><div class="impact-label">Semantic Scholar Citations<br><em style="color:#3e5270;" id="citation-date-ss">Auto-updated weekly</em></div></div>
+        <div class="impact-card ca-data" id="citation-card-cr"><span class="impact-num" id="citation-count-cr">&#8212;</span><div class="impact-label">Crossref Citations<br><em style="color:#3e5270;" id="citation-date-cr">Auto-updated weekly</em></div></div>
         <div class="impact-card ca-data"><span class="impact-num">68K+</span><div class="impact-label">Facebook Posts Analysed<br><em style="color:#3e5270;">Across 4 Indian news outlets</em></div></div>
         <div class="impact-card ca-data"><span class="impact-num">2+</span><div class="impact-label">Years of Pandemic Data<br><em style="color:#3e5270;">March 2020 &ndash; March 2022</em></div></div>
         <div class="impact-card ca-link"><a href="https://scholar.google.com/citations?user=Z2kACpkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer me" style="text-decoration:none;display:block;"><span class="impact-num" style="font-size:1.5rem;">Scholar</span><div class="impact-label">View citations &amp; h-index<br><em style="color:#3e5270;">Google Scholar profile &#8599;</em></div></a></div>
         <div class="impact-card ca-link"><a href="https://orcid.org/0009-0000-2819-9179" target="_blank" rel="noopener noreferrer me" style="text-decoration:none;display:block;"><span class="impact-num" style="font-size:1.5rem;">ORCID</span><div class="impact-label">Verified research record<br><em style="color:#3e5270;">0009-0000-2819-9179 &#8599;</em></div></a></div>
       </div>
-      <p class="impact-note" id="impact-note">Citation count via Semantic Scholar API &mdash; updated automatically every Monday.</p>
+      <p class="impact-note" id="impact-note">Citation counts via Semantic Scholar &amp; Crossref APIs &mdash; updated automatically every Monday.</p>
     </section>
 
     <section class="service-section" id="service">
@@ -482,18 +483,24 @@
       Object.values(sections).forEach(function(s){obs.observe(s.el);});
     })();
 
-    /* Auto citation count from citations.json */
+    /* Auto citation counts from citations.json */
     (function(){
-      var countEl=document.getElementById('citation-count');
-      var dateEl=document.getElementById('citation-date');
+      var ssEl=document.getElementById('citation-count-ss');
+      var crEl=document.getElementById('citation-count-cr');
+      var ssDateEl=document.getElementById('citation-date-ss');
+      var crDateEl=document.getElementById('citation-date-cr');
       fetch('citations.json?v='+Date.now())
         .then(function(r){return r.json();})
         .then(function(data){
           var d=data.frontiers2024;if(!d)return;
-          countEl.textContent=d.citationCount!==undefined?d.citationCount:'—';
-          if(d.lastUpdated)dateEl.textContent='Last updated '+d.lastUpdated;
+          ssEl.textContent=d.semanticScholar!==undefined?d.semanticScholar:'—';
+          crEl.textContent=d.crossref!==undefined?d.crossref:'—';
+          if(d.lastUpdated){
+            ssDateEl.textContent='Last updated '+d.lastUpdated;
+            crDateEl.textContent='Last updated '+d.lastUpdated;
+          }
         })
-        .catch(function(){countEl.textContent='—';});
+        .catch(function(){ssEl.textContent='—';crEl.textContent='—';});
     })();
 
     /* Dynamic footer year/month */

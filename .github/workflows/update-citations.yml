@@ -15,26 +15,34 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Fetch citation count from Semantic Scholar
+      - name: Fetch citation counts
         id: fetch
         run: |
           DOI="10.3389/fsoc.2024.1379265"
 
-          RESPONSE=$(curl -s --max-time 20 \
-            "https://api.semanticscholar.org/graph/v1/paper/DOI:${DOI}?fields=citationCount,title,year")
+          # --- Semantic Scholar ---
+          SS_RESPONSE=$(curl -s --max-time 20 \
+            "https://api.semanticscholar.org/graph/v1/paper/DOI:${DOI}?fields=citationCount")
+          echo "Semantic Scholar response: $SS_RESPONSE"
+          SS_COUNT=$(echo "$SS_RESPONSE" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("citationCount",0))')
+          echo "Semantic Scholar count: $SS_COUNT"
 
-          echo "API response: $RESPONSE"
+          # --- Crossref ---
+          CR_RESPONSE=$(curl -s --max-time 20 \
+            "https://api.crossref.org/works/${DOI}?mailto=anwar1524@gmail.com")
+          echo "Crossref response (truncated): $(echo $CR_RESPONSE | head -c 300)"
+          CR_COUNT=$(echo "$CR_RESPONSE" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("message",{}).get("is-referenced-by-count",0))')
+          echo "Crossref count: $CR_COUNT"
 
-          COUNT=$(echo "$RESPONSE" | python3 -c 'import sys, json; data = json.load(sys.stdin); print(data.get("citationCount", 0))')
-
-          echo "citation_count=$COUNT" >> $GITHUB_OUTPUT
-          echo "Fetched citation count: $COUNT"
+          echo "ss_count=$SS_COUNT" >> $GITHUB_OUTPUT
+          echo "cr_count=$CR_COUNT" >> $GITHUB_OUTPUT
 
       - name: Write citations.json
         run: |
-          COUNT="${{ steps.fetch.outputs.citation_count }}"
+          SS="${{ steps.fetch.outputs.ss_count }}"
+          CR="${{ steps.fetch.outputs.cr_count }}"
           DATE=$(date -u +"%Y-%m-%d")
-          printf '{\n  "frontiers2024": {\n    "doi": "10.3389/fsoc.2024.1379265",\n    "title": "Facebook Reactions as Emotional Indicators",\n    "citationCount": %s,\n    "lastUpdated": "%s"\n  }\n}\n' "$COUNT" "$DATE" > citations.json
+          printf '{\n  "frontiers2024": {\n    "doi": "10.3389/fsoc.2024.1379265",\n    "title": "Facebook Reactions as Emotional Indicators",\n    "semanticScholar": %s,\n    "crossref": %s,\n    "lastUpdated": "%s"\n  }\n}\n' "$SS" "$CR" "$DATE" > citations.json
           cat citations.json
 
       - name: Commit and push if changed
@@ -43,8 +51,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add citations.json
           if git diff --cached --quiet; then
-            echo "No change in citation count - skipping commit."
+            echo "No change in citation counts - skipping commit."
           else
-            git commit -m "chore: update citation count [skip ci]"
+            git commit -m "chore: update citation counts [skip ci]"
             git push
           fi
