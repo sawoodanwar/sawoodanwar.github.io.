@@ -1,4 +1,4 @@
-name: Update Citation Count
+name: Update Citation Counts
 
 on:
   schedule:
@@ -13,36 +13,88 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Fetch citation counts
         id: fetch
         run: |
           DOI="10.3389/fsoc.2024.1379265"
 
-          # --- Semantic Scholar ---
-          SS_RESPONSE=$(curl -s --max-time 20 \
-            "https://api.semanticscholar.org/graph/v1/paper/DOI:${DOI}?fields=citationCount")
-          echo "Semantic Scholar response: $SS_RESPONSE"
-          SS_COUNT=$(echo "$SS_RESPONSE" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("citationCount",0))')
-          echo "Semantic Scholar count: $SS_COUNT"
+          # --- Semantic Scholar (with retry) ---
+          SS_COUNT=0
+          for attempt in 1 2 3; do
+            SS_RESPONSE=$(curl -s --max-time 20 \
+              -H "Accept: application/json" \
+              "https://api.semanticscholar.org/graph/v1/paper/DOI:${DOI}?fields=citationCount")
+            echo "Semantic Scholar attempt ${attempt}: $SS_RESPONSE"
+            SS_TRY=$(echo "$SS_RESPONSE" | python3 -c \
+              'import sys,json
+try:
+  d=json.load(sys.stdin)
+  print(d.get("citationCount",""))
+except:
+  print("")' 2>/dev/null)
+            if [ -n "$SS_TRY" ] && [ "$SS_TRY" != "None" ]; then
+              SS_COUNT=$SS_TRY
+              break
+            fi
+            sleep 5
+          done
+          echo "Semantic Scholar final count: $SS_COUNT"
 
-          # --- Crossref ---
-          CR_RESPONSE=$(curl -s --max-time 20 \
-            "https://api.crossref.org/works/${DOI}?mailto=anwar1524@gmail.com")
-          echo "Crossref response (truncated): $(echo $CR_RESPONSE | head -c 300)"
-          CR_COUNT=$(echo "$CR_RESPONSE" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("message",{}).get("is-referenced-by-count",0))')
-          echo "Crossref count: $CR_COUNT"
+          # --- Crossref (with retry) ---
+          CR_COUNT=0
+          for attempt in 1 2 3; do
+            CR_RESPONSE=$(curl -s --max-time 20 \
+              -H "Accept: application/json" \
+              "https://api.crossref.org/works/${DOI}?mailto=anwar1524@gmail.com")
+            echo "Crossref attempt ${attempt} (truncated): $(echo $CR_RESPONSE | head -c 300)"
+            CR_TRY=$(echo "$CR_RESPONSE" | python3 -c \
+              'import sys,json
+try:
+  d=json.load(sys.stdin)
+  print(d.get("message",{}).get("is-referenced-by-count",""))
+except:
+  print("")' 2>/dev/null)
+            if [ -n "$CR_TRY" ] && [ "$CR_TRY" != "None" ]; then
+              CR_COUNT=$CR_TRY
+              break
+            fi
+            sleep 5
+          done
+          echo "Crossref final count: $CR_COUNT"
 
           echo "ss_count=$SS_COUNT" >> $GITHUB_OUTPUT
-          echo "cr_count=$CR_COUNT" >> $GITHUB_OUTPUT
+          echo "cr_count=$CR_COUNT"  >> $GITHUB_OUTPUT
+
+      - name: Read existing citations.json for fallback
+        id: existing
+        run: |
+          if [ -f citations.json ]; then
+            OLD_SS=$(python3 -c 'import json; d=json.load(open("citations.json")); print(d["frontiers2024"].get("semanticScholar",0))' 2>/dev/null || echo "0")
+            OLD_CR=$(python3 -c 'import json; d=json.load(open("citations.json")); print(d["frontiers2024"].get("crossref",0))' 2>/dev/null || echo "0")
+          else
+            OLD_SS=0
+            OLD_CR=0
+          fi
+          echo "old_ss=$OLD_SS" >> $GITHUB_OUTPUT
+          echo "old_cr=$OLD_CR"  >> $GITHUB_OUTPUT
 
       - name: Write citations.json
         run: |
           SS="${{ steps.fetch.outputs.ss_count }}"
           CR="${{ steps.fetch.outputs.cr_count }}"
+          OLD_SS="${{ steps.existing.outputs.old_ss }}"
+          OLD_CR="${{ steps.existing.outputs.old_cr }}"
           DATE=$(date -u +"%Y-%m-%d")
-          printf '{\n  "frontiers2024": {\n    "doi": "10.3389/fsoc.2024.1379265",\n    "title": "Facebook Reactions as Emotional Indicators",\n    "semanticScholar": %s,\n    "crossref": %s,\n    "lastUpdated": "%s"\n  }\n}\n' "$SS" "$CR" "$DATE" > citations.json
+
+          # Use fetched value if non-zero, otherwise keep previous value as fallback
+          FINAL_SS=$([ "$SS" != "0" ] && [ -n "$SS" ] && echo "$SS" || echo "$OLD_SS")
+          FINAL_CR=$([ "$CR" != "0" ] && [ -n "$CR" ] && echo "$CR" || echo "$OLD_CR")
+
+          printf '{\n  "frontiers2024": {\n    "doi": "10.3389/fsoc.2024.1379265",\n    "title": "Facebook Reactions as Emotional Indicators",\n    "semanticScholar": %s,\n    "crossref": %s,\n    "googleScholar": "https://scholar.google.com/citations?user=Z2kACpkAAAAJ&hl=en",\n    "lastUpdated": "%s"\n  }\n}\n' \
+            "$FINAL_SS" "$FINAL_CR" "$DATE" > citations.json
+          echo "--- Final citations.json ---"
           cat citations.json
 
       - name: Commit and push if changed
